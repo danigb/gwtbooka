@@ -11,18 +11,26 @@ public class Params {
 	isFirst = true;
     }
 
+    public void put(String key, String value) {
+	if (key != null) {
+	    if (isFirst) {
+		isFirst = false;
+	    } else {
+		buffer.append("&");
+	    }
+	    value = value == null ? "" : value;
+	    buffer.append(URL.encode(key)).append("=").append(URL.encodeComponent(value));
+	}
+    }
+
     @Override
     public String toString() {
 	return buffer.toString();
     }
 
     public Params With(String key, String value) {
-	if (isFirst) {
-	    isFirst = false;
-	} else {
-	    buffer.append("&");
-	}
-	buffer.append(URL.encode(key)).append("=").append(URL.encodeComponent(value));
+	put(key, value);
 	return this;
     }
+
 }

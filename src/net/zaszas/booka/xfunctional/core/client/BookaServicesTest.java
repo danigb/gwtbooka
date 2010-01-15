@@ -1,7 +1,10 @@
 package net.zaszas.booka.xfunctional.core.client;
 
+import net.zaszas.booka.core.client.model.Bok;
 import net.zaszas.booka.core.client.model.BokJSO;
+import net.zaszas.booka.core.client.model.BokSearchResults;
 import net.zaszas.booka.core.client.model.UserSession;
+import net.zaszas.booka.core.client.service.BokQuery;
 import net.zaszas.booka.core.client.service.BokServiceAsyncJSON;
 import net.zaszas.booka.core.client.service.UserSessionServiceAsyncJSON;
 
@@ -24,7 +27,6 @@ public class BookaServicesTest implements EntryPoint {
 	userService = new UserSessionServiceAsyncJSON();
 	bokService = new BokServiceAsyncJSON();
 	initSession();
-	// searchBoks();
     }
 
     private void initSession() {
@@ -49,20 +51,23 @@ public class BookaServicesTest implements EntryPoint {
     }
 
     protected void createBok() {
-	BokJSO bok = BokJSO.newInstance();
+	Bok bok = BokJSO.newInstance();
 	bok.setDescription("Description");
+	bok.setTitle("My title");
+	bok.setBokType("Project");
 	print("Bok: " + bok);
 
 	print("Sending create:");
-	bokService.create(bok, new AsyncCallback<String>() {
+	bokService.create(bok, new AsyncCallback<Bok>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
 		print("Failure: " + caught);
 	    }
 
 	    @Override
-	    public void onSuccess(String result) {
-		print("Success: " + result);
+	    public void onSuccess(Bok bok) {
+		print("Success: " + bok.getTitle());
+		searchBoks();
 	    }
 	});
 
@@ -70,15 +75,17 @@ public class BookaServicesTest implements EntryPoint {
 
     void searchBoks() {
 	print("Sending search request:");
-	bokService.search(null, new AsyncCallback<String>() {
+	BokQuery query = new BokQuery();
+	query.bokTypeEquals("Project");
+	bokService.search(query, new AsyncCallback<BokSearchResults>() {
 	    @Override
 	    public void onFailure(Throwable caught) {
 		print("Failure: " + caught);
 	    }
 
 	    @Override
-	    public void onSuccess(String result) {
-		print("Success: " + result);
+	    public void onSuccess(BokSearchResults results) {
+		print("Success: " + results.getSize());
 	    }
 	});
     }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='Booka'>
 	<inherits name='com.google.gwt.user.User' />
-	<inherits name='com.calclab.suco.Suco' />
-
+    <inherits name="net.zaszas.booka.core.BookaUI" />
 
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
