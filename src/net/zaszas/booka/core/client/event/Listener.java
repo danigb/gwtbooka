@@ -1,4 +1,4 @@
-package net.zaszas.booka.core.event;
+package net.zaszas.booka.core.client.event;
 
 public interface Listener<T> {
     void handle(T object);

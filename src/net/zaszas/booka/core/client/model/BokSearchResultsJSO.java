@@ -7,10 +7,12 @@ public class BokSearchResultsJSO extends JavaScriptObject implements BokSearchRe
     protected BokSearchResultsJSO() {
     }
 
+    @Override
     public final native Bok get(int index) /*-{
         return this[index];
     }-*/;
 
+    @Override
     public final native int getSize() /*-{
         return this.length;
     }-*/;

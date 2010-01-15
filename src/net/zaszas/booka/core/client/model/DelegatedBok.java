@@ -18,6 +18,11 @@ public class DelegatedBok implements Bok {
     }
 
     @Override
+    public int getId() {
+	return delegate.getId();
+    }
+
+    @Override
     public String getTitle() {
 	return delegate.getTitle();
     }

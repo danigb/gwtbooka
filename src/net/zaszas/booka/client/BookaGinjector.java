@@ -1,7 +1,7 @@
 package net.zaszas.booka.client;
 
-import net.zaszas.booka.core.BookaCoreGinjector;
-import net.zaszas.booka.core.BookaCoreModule;
+import net.zaszas.booka.core.client.BookaCoreGinjector;
+import net.zaszas.booka.core.client.BookaCoreModule;
 import net.zaszas.booka.ui.client.BookaUIGinjector;
 import net.zaszas.booka.ui.client.BookaUIModule;
 

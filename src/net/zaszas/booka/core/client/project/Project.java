@@ -1,4 +1,4 @@
-package net.zaszas.booka.core.project;
+package net.zaszas.booka.core.client.project;
 
 import net.zaszas.booka.core.client.model.Bok;
 import net.zaszas.booka.core.client.model.DelegatedBok;

@@ -23,6 +23,11 @@ public class BokJSO extends JavaScriptObject implements Bok {
     }-*/;
 
     @Override
+    public final native int getId() /*-{
+        return this.bok.id;
+    }-*/;
+
+    @Override
     public final native String getTitle() /*-{
         return this.bok.title;
     }-*/;

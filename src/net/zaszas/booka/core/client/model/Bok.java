@@ -6,6 +6,8 @@ public interface Bok {
 
     String getDescription();
 
+    int getId();
+
     String getTitle();
 
     void setBokType(String type);

@@ -29,19 +29,18 @@ public class BokServiceAsyncJSON implements BokServiceAsync {
 
 	Params p = new Params().With("authenticity_token", authToken);
 	encode(bok, p);
-	GWT.log("PARAMS: " + p.toString(), null);
 	try {
 	    builder.sendRequest(p.toString(), new RequestCallback() {
 		@Override
 		public void onError(Request request, Throwable exception) {
-		    callback.onFailure(exception);
+		    handleException(exception, callback);
 		}
 
 		@Override
 		public void onResponseReceived(Request request, Response response) {
-		    BokJSO bok = JsonUtils.unsafeEval(response.getText());
-		    callback.onSuccess(bok);
+		    handleBokResponse(response, callback);
 		}
+
 	    });
 	} catch (RequestException e) {
 	    callback.onFailure(e);
@@ -55,13 +54,12 @@ public class BokServiceAsyncJSON implements BokServiceAsync {
 	builder.setCallback(new RequestCallback() {
 	    @Override
 	    public void onError(Request request, Throwable exception) {
-		callback.onFailure(exception);
+		handleException(exception, callback);
 	    }
 
 	    @Override
 	    public void onResponseReceived(Request request, Response response) {
-		BokJSO bok = JsonUtils.unsafeEval(response.getText());
-		callback.onSuccess(bok);
+		handleBokResponse(response, callback);
 	    }
 	});
 	try {
@@ -85,7 +83,9 @@ public class BokServiceAsyncJSON implements BokServiceAsync {
 
 		@Override
 		public void onResponseReceived(Request request, Response response) {
-		    BokSearchResultsJSO results = JsonUtils.unsafeEval(response.getText());
+		    String responseText = response.getText();
+		    GWT.log("SEARCH " + responseText, null);
+		    BokSearchResultsJSO results = JsonUtils.unsafeEval(responseText);
 		    callback.onSuccess(results);
 		}
 	    });
@@ -112,5 +112,17 @@ public class BokServiceAsyncJSON implements BokServiceAsync {
 	    p.put("search[" + key + "]", map.get(key));
 	}
 	return p;
+    }
+
+    private void handleBokResponse(Response response, final AsyncCallback<Bok> callback) {
+	String responseText = response.getText();
+	GWT.log("BOK: " + responseText, null);
+	BokJSO bok = JsonUtils.unsafeEval(responseText);
+	callback.onSuccess(bok);
+    }
+
+    private void handleException(Throwable exception, final AsyncCallback<Bok> callback) {
+	GWT.log("EXCEPTION BokService", exception);
+	callback.onFailure(exception);
     }
 }

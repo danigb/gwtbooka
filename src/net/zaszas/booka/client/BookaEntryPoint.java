@@ -1,5 +1,8 @@
 package net.zaszas.booka.client;
 
+import net.zaszas.booka.ui.client.app.BookaAppLogic;
+import net.zaszas.booka.ui.client.app.BookaAppView;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
@@ -9,8 +12,12 @@ public class BookaEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
+	GWT.log("Loading...", null);
 	BookaGinjector injector = GWT.create(BookaGinjector.class);
-	RootLayoutPanel.get().add((Widget) injector.getBookaAppView());
+	BookaAppView bookaApp = injector.getBookaAppView();
+	new BookaAppLogic(injector, bookaApp);
+	RootLayoutPanel.get().add((Widget) bookaApp);
+	GWT.log("Loading complete.", null);
     }
 
 }
