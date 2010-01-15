@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='Booka'>
 	<inherits name='com.google.gwt.user.User' />
-    <inherits name="net.zaszas.booka.core.BookaUI" />
+	<inherits name="net.zaszas.booka.ui.BookaUI" />
 
 	<inherits name='com.google.gwt.user.theme.standard.Standard' />
 	<!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
@@ -12,4 +12,5 @@
 	<!-- Specify the paths for translatable code                    -->
 	<source path='client' />
 
+	<entry-point class="net.zaszas.booka.client.BookaEntryPoint"></entry-point>
 </module>
