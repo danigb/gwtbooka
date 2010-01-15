@@ -3,5 +3,7 @@
 <module rename-to="booka.functional.BookaServicesTest">
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name="net.zaszas.booka.core.BookaCore" />
-	<source path="client"/>
+	<source path="client" />
+	<entry-point
+		class="net.zaszas.booka.xfunctional.core.client.BookaServicesTest" />
 </module>
