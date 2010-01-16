@@ -1,0 +1,39 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.docInfo {
+			width: 100%;
+			overflow: hidden;
+			border-bottom: 1px solid #efefef;
+			font-family: "Garamond", serif;
+			color: gray;
+			background-color: white;
+		}
+		
+		.title {
+			margin: 0 0 0 5px;
+			padding: 0;
+			font-size: 120%;
+			opacity: 0.7;
+			cursor: pointer;
+		}
+		
+		.description {
+			font-size: 90%;
+			display: block;
+			margin: 0.2em 0.5em 0 10px;
+		}
+		
+		.extra {
+			font-size: 80%;
+			font-family: sans-serif;
+			margin-left: 10px;
+		}
+	</ui:style>
+	<g:HTMLPanel styleName="{style.docInfo}">
+		<g:Label styleName="{style.title}" ui:field="title">Title</g:Label>
+		<span ui:field="description" class="{style.description}">Description</span>
+		<span ui:field="extra" class="{style.extra}">Extra information</span>
+	</g:HTMLPanel>
+</ui:UiBinder> 

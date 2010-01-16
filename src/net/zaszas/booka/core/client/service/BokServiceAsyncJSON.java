@@ -51,6 +51,8 @@ public class BokServiceAsyncJSON implements BokServiceAsync {
     public void get(String id, final AsyncCallback<Bok> callback) {
 	String url = URL + "/" + id + ".json";
 	RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
+	builder.setHeader("Content-type", "application/x-www-form-urlencoded");
+
 	builder.setCallback(new RequestCallback() {
 	    @Override
 	    public void onError(Request request, Throwable exception) {
@@ -71,9 +73,11 @@ public class BokServiceAsyncJSON implements BokServiceAsync {
 
     @Override
     public void search(BokQuery query, final AsyncCallback<BokSearchResults> callback) {
-	String url = URL + ".json";
-	RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 	Params p = encode(query, new Params());
+	String url = URL + ".json";
+	url += "?" + p.toString();
+	RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
+
 	try {
 	    builder.sendRequest(p.toString(), new RequestCallback() {
 		@Override

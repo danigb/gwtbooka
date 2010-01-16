@@ -7,7 +7,7 @@ public class Project extends DelegatedBok {
     public static final String TYPE = "Project";
 
     public Project(Bok bok) {
-	super(bok);
+	super(bok, TYPE);
     }
 
     @Override

@@ -3,11 +3,15 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
 		.comments {
-			background-color: #C6C8CA;
+			background-color: #00AEEF;
 			color: white;
-         }
+			text-align:  center;
+			padding: 3em;
+		}
 	</ui:style>
-	<g:HTMLPanel styleName="{style.comments}">
-	<span>Nada todavía</span>
-	</g:HTMLPanel>
+	<g:DockLayoutPanel styleName="{style.comments}">
+		<g:center>
+			<g:Label>Nada aún</g:Label>
+		</g:center>
+	</g:DockLayoutPanel>
 </ui:UiBinder> 

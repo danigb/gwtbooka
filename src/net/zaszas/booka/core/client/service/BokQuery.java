@@ -16,7 +16,7 @@ public class BokQuery {
     }
 
     public void bokTypeEquals(String bokType) {
-	query.put("username_equals", bokType);
+	query.put("bok_type_equals", bokType);
     }
 
     public Map<String, String> getMap() {

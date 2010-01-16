@@ -1,10 +1,12 @@
 package net.zaszas.booka.core.client.model;
 
 public class DelegatedBok implements Bok {
-    private final Bok delegate;
+    protected final Bok delegate;
 
-    public DelegatedBok(Bok delegate) {
+    public DelegatedBok(Bok delegate, String bokType) {
 	this.delegate = delegate;
+	assert bokType.equals(delegate.getBokType()) : "Bok type doesn't match! (" + bokType + " != "
+		+ delegate.getBokType() + ")";
     }
 
     @Override
@@ -29,7 +31,7 @@ public class DelegatedBok implements Bok {
 
     @Override
     public void setBokType(String type) {
-	delegate.setBokType(type);
+	assert false : "Only subclasess can change bok type";
     }
 
     @Override

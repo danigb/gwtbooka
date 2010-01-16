@@ -1,0 +1,32 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.action {
+			cursor: pointer;
+			float: left;
+			padding: 0.2em 1em;
+			margin: 1px 0 0 3px;
+			color: white;
+			background-color: #00AEEF;
+			color: white;
+			font-family: sans;
+		}
+		
+		.scroll {
+			background-color: white;
+		}
+	</ui:style>
+	<g:LayoutPanel>
+		<g:layer left="0" top="0" right="0" height="30px">
+			<g:FlowPanel>
+				<g:Anchor ui:field="create" styleName="{style.action}">Create document</g:Anchor>
+			</g:FlowPanel>
+		</g:layer>
+		<g:layer left="0" top="30px" right="0" bottom="0">
+			<g:ScrollPanel styleName="{style.scroll}">
+				<g:FlowPanel ui:field="list"></g:FlowPanel>
+			</g:ScrollPanel>
+		</g:layer>
+	</g:LayoutPanel>
+</ui:UiBinder> 

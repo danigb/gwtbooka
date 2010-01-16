@@ -1,4 +1,4 @@
-package net.zaszas.booka.ui.client.archives;
+package net.zaszas.booka.ui.client.archives.comments;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

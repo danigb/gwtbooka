@@ -1,6 +1,8 @@
 package net.zaszas.booka.ui.client.archives;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
+import net.zaszas.booka.ui.client.archives.browser.DocumentBrowserView;
+import net.zaszas.booka.ui.client.archives.comments.DocumentCommentsView;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;

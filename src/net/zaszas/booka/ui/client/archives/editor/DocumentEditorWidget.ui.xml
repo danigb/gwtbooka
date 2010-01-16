@@ -2,10 +2,8 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		.documents {
-			background-color: white;
-		}
+		
 	</ui:style>
-	<g:HTMLPanel styleName="{style.documents}">
+	<g:HTMLPanel>
 	</g:HTMLPanel>
 </ui:UiBinder> 

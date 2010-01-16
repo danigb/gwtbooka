@@ -12,11 +12,26 @@ import com.google.inject.Inject;
 public class DefaultDocumentManager implements DocumentManager {
     private final BokManager manager;
     private final Collector<ProjectDocuments> onDocuments;
+    private final Collector<DocumentClips> onClips;
 
     @Inject
     public DefaultDocumentManager(BokManager manager) {
 	this.manager = manager;
 	this.onDocuments = new Collector<ProjectDocuments>();
+	this.onClips = new Collector<DocumentClips>();
+    }
+
+    @Override
+    public void getDocumentClips(final Document document) {
+	BokQuery query = new BokQuery();
+	query.bokParentEquals(document.getId());
+	query.bokTypeEquals(Clip.TYPE);
+	manager.search(query, new Listener<BokSearchResults>() {
+	    @Override
+	    public void handle(BokSearchResults results) {
+		onClips.fire(new DocumentClips(document, results));
+	    }
+	});
     }
 
     @Override
@@ -30,6 +45,11 @@ public class DefaultDocumentManager implements DocumentManager {
 		onDocuments.fire(new ProjectDocuments(project, results));
 	    }
 	});
+    }
+
+    @Override
+    public void onDocumentsClips(Listener<DocumentClips> listener) {
+	onClips.add(listener);
     }
 
     @Override
