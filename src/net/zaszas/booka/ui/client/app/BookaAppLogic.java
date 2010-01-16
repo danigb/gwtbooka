@@ -32,11 +32,9 @@ public class BookaAppLogic {
 
     public void handleToken(String token) {
 	if (token.matches(Router.REGEX_HOME) || token.matches(Router.REGEX_ENTRANCE)) {
-	    GWT.log("Loading entrance...", null);
 	    view.show(getEntrance());
 	    entrance.loadProjects();
 	} else if (token.matches(Router.REGEX_ARCHIVES)) {
-	    GWT.log("Loading archives", null);
 	    view.show(getArchives());
 	    archives.loadProject(Router.getProjectFromArchives(token));
 	}

@@ -4,6 +4,7 @@ import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
 import net.zaszas.booka.ui.client.View;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.layout.client.Layout.AnimationCallback;
 import com.google.gwt.layout.client.Layout.Layer;
 import com.google.gwt.user.client.ui.Composite;
@@ -22,6 +23,7 @@ public class SlideLayoutPanel extends Composite {
     }
 
     public void show(View view) {
+	GWT.log("Add view to slide" + view, null);
 	panel.add((Widget) view);
 	panel.setWidgetTopBottom((Widget) view, 0, PX, 0, PX);
 	panel.setWidgetLeftWidth((Widget) view, 0, PX, 0, PCT);
