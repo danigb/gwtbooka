@@ -5,6 +5,8 @@ import net.zaszas.booka.core.client.project.Project;
 
 public interface DocumentManager {
 
+    public void createDocument(Document document);
+
     public void getDocumentClips(Document document);
 
     public void getDocuments(Project project);

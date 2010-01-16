@@ -51,10 +51,9 @@ public class BookaServicesTest implements EntryPoint {
     }
 
     protected void createBok() {
-	Bok bok = BokJSO.newInstance();
+	Bok bok = BokJSO.newInstance("Project");
 	bok.setDescription("Description");
 	bok.setTitle("My title");
-	bok.setBokType("Project");
 	print("Bok: " + bok);
 
 	print("Sending create:");

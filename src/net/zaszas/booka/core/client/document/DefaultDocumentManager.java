@@ -2,6 +2,7 @@ package net.zaszas.booka.core.client.document;
 
 import net.zaszas.booka.core.client.event.Collector;
 import net.zaszas.booka.core.client.event.Listener;
+import net.zaszas.booka.core.client.model.Bok;
 import net.zaszas.booka.core.client.model.BokSearchResults;
 import net.zaszas.booka.core.client.project.Project;
 import net.zaszas.booka.core.client.service.BokManager;
@@ -19,6 +20,17 @@ public class DefaultDocumentManager implements DocumentManager {
 	this.manager = manager;
 	this.onDocuments = new Collector<ProjectDocuments>();
 	this.onClips = new Collector<DocumentClips>();
+    }
+
+    @Override
+    public void createDocument(final Document document) {
+	manager.create(document, new Listener<Bok>() {
+	    @Override
+	    public void handle(Bok bok) {
+		Document document = new Document(bok);
+		onClips.fire(new DocumentClips(document, BokSearchResults.NONE));
+	    }
+	});
     }
 
     @Override

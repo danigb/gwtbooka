@@ -1,4 +1,4 @@
-package net.zaszas.booka.ui.client.app;
+package net.zaszas.booka.ui.client.slider;
 
 import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
@@ -11,7 +11,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SlideLayoutPanel extends Composite {
+public class SlideLayoutPanel extends Composite implements SlideView {
 
     private final LayoutPanel panel;
     private View currentView;
@@ -22,7 +22,8 @@ public class SlideLayoutPanel extends Composite {
 	currentView = null;
     }
 
-    public void show(View view) {
+    @Override
+    public void show(View view, Transition transition) {
 	GWT.log("Add view to slide" + view, null);
 	panel.add((Widget) view);
 	panel.setWidgetTopBottom((Widget) view, 0, PX, 0, PX);

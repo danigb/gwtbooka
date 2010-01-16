@@ -10,6 +10,11 @@ public class DelegatedBok implements Bok {
     }
 
     @Override
+    public String getBody() {
+	return delegate.getBody();
+    }
+
+    @Override
     public String getBokType() {
 	return delegate.getBokType();
     }
@@ -25,8 +30,18 @@ public class DelegatedBok implements Bok {
     }
 
     @Override
+    public int getParentId() {
+	return delegate.getParentId();
+    }
+
+    @Override
     public String getTitle() {
 	return delegate.getTitle();
+    }
+
+    @Override
+    public void setBody(String body) {
+	delegate.setBody(body);
     }
 
     @Override
@@ -37,6 +52,11 @@ public class DelegatedBok implements Bok {
     @Override
     public void setDescription(String text) {
 	delegate.setDescription(text);
+    }
+
+    @Override
+    public void setParentId(int id) {
+	delegate.setParentId(id);
     }
 
     @Override

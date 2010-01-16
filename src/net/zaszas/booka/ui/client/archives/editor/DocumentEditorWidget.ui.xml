@@ -2,8 +2,42 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
+		.container {
+			width: 90%;
+			margin: 1em 5%;
+		}
 		
+		.content {
+			width: 80%;
+			margin: 0 auto;
+		}
+		
+		.page {
+			width: 80%;
+			margin: 0 10%;
+			min-height: 800px;
+			border: 1px solid gray;
+			background-color: white;
+			font-family: "Garamon", serif;
+			padding: 1em;
+		}
+		
+		.title {
+			font-size: 200%;
+			text-align: center;
+		}
+		
+		.description {
+			text-align: center;
+			font-style: italic;
+		}
 	</ui:style>
-	<g:HTMLPanel>
-	</g:HTMLPanel>
+	<g:ScrollPanel styleName="Document {style.container}">
+		<g:FlowPanel styleName="{style.page}" ui:field="page">
+			<g:Label styleName="{style.title}" ui:field="title">Title</g:Label>
+			<g:Label styleName="{style.description}" ui:field="description">Description</g:Label>
+			<g:FlowPanel styleName="content {style.content}"
+				ui:field="content"></g:FlowPanel>
+		</g:FlowPanel>
+	</g:ScrollPanel>
 </ui:UiBinder> 

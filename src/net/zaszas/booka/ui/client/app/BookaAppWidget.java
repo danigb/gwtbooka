@@ -2,6 +2,8 @@ package net.zaszas.booka.ui.client.app;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 import net.zaszas.booka.ui.client.View;
+import net.zaszas.booka.ui.client.slider.SlideLayoutPanel;
+import net.zaszas.booka.ui.client.slider.SlideView.Transition;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -41,7 +43,7 @@ public class BookaAppWidget extends Composite implements BookaAppView {
 
     @Override
     public void show(View view) {
-	slideLayout.show(view);
+	slideLayout.show(view, Transition.slideRight);
     }
 
 }

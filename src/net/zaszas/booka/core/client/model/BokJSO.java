@@ -5,12 +5,17 @@ import com.google.gwt.core.client.JsonUtils;
 
 public class BokJSO extends JavaScriptObject implements Bok {
 
-    public static BokJSO newInstance() {
-	return JsonUtils.unsafeEval("{'bok':{}}");
+    public static BokJSO newInstance(String bokType) {
+	return JsonUtils.unsafeEval("{'bok':{'bok_type': '" + bokType + "'}}");
     }
 
     protected BokJSO() {
     }
+
+    @Override
+    public final native String getBody() /*-{
+        return this.bok.body;
+    }-*/;
 
     @Override
     public final native String getBokType() /*-{
@@ -28,8 +33,18 @@ public class BokJSO extends JavaScriptObject implements Bok {
     }-*/;
 
     @Override
+    public final native int getParentId() /*-{
+        return this.bok.parent_id;
+    }-*/;
+
+    @Override
     public final native String getTitle() /*-{
         return this.bok.title;
+    }-*/;
+
+    @Override
+    public final native void setBody(String body) /*-{
+        this.bok.body= body;
     }-*/;
 
     @Override
@@ -43,8 +58,12 @@ public class BokJSO extends JavaScriptObject implements Bok {
     }-*/;
 
     @Override
+    public final native void setParentId(int id) /*-{
+        this.bok.parent_id = id;
+    }-*/;
+
+    @Override
     public final native void setTitle(String title) /*-{
         this.bok.title = title;
     }-*/;
-
 }
