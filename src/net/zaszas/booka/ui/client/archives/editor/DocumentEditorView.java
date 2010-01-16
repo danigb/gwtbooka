@@ -15,4 +15,6 @@ public interface DocumentEditorView extends View {
 
     void setDocumentTitle(String title);
 
+    void setDocumentVisible(boolean visible);
+
 }

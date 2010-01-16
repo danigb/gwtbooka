@@ -19,18 +19,16 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public class BokServiceAsyncJSON implements BokServiceAsync {
 
     private static final String URL = "/data/boks";
-    private String authToken;
 
     @Override
-    public void create(Bok bok, final AsyncCallback<Bok> callback) {
+    public void create(Params params, Bok bok, final AsyncCallback<Bok> callback) {
 	String url = URL + ".json";
 	RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 	builder.setHeader("Content-type", "application/x-www-form-urlencoded");
 
-	Params p = new Params().With("authenticity_token", authToken);
-	encode(bok, p);
+	encode(bok, params);
 	try {
-	    builder.sendRequest(p.toString(), new RequestCallback() {
+	    builder.sendRequest(params.toString(), new RequestCallback() {
 		@Override
 		public void onError(Request request, Throwable exception) {
 		    handleException(exception, callback);
@@ -99,14 +97,12 @@ public class BokServiceAsyncJSON implements BokServiceAsync {
 
     }
 
-    public void setAuthToken(String authToken) {
-	this.authToken = authToken;
-    }
-
     private Params encode(Bok bok, Params p) {
 	p.put("bok[title]", bok.getTitle());
 	p.put("bok[description]", bok.getDescription());
 	p.put("bok[bok_type]", bok.getBokType());
+	p.put("bok[parent_id]", "" + bok.getParentId());
+	p.put("bok[user_id]", "" + bok.getUserId());
 	return p;
     }
 

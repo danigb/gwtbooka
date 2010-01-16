@@ -14,6 +14,10 @@ public interface Bok {
 
     String getTitle();
 
+    int getUserId();
+
+    String getUserName();
+
     void setBody(String body);
 
     void setBokType(String type);
@@ -23,4 +27,6 @@ public interface Bok {
     void setParentId(int id);
 
     void setTitle(String title);
+
+    void setUserId(int id);
 }

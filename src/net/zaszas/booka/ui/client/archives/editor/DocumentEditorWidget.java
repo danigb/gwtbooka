@@ -22,7 +22,7 @@ public class DocumentEditorWidget extends Composite implements DocumentEditorVie
     Label title, description;
 
     @UiField
-    FlowPanel content;
+    FlowPanel content, page;
 
     @Inject
     public DocumentEditorWidget(DocumentEditorLogic logic) {
@@ -53,6 +53,11 @@ public class DocumentEditorWidget extends Composite implements DocumentEditorVie
     @Override
     public void setDocumentTitle(String text) {
 	title.setText(text);
+    }
+
+    @Override
+    public void setDocumentVisible(boolean visible) {
+	page.setVisible(visible);
     }
 
 }

@@ -16,8 +16,12 @@
 		.scroll {
 			background-color: white;
 		}
+		
+		.browser {
+			background-color: #efefef;
+		}
 	</ui:style>
-	<g:LayoutPanel>
+	<g:LayoutPanel styleName="{style.browser}">
 		<g:layer left="0" top="0" right="0" height="30px">
 			<g:FlowPanel>
 				<g:Anchor ui:field="create" styleName="{style.action}">Create document</g:Anchor>

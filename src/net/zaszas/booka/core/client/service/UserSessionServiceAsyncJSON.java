@@ -19,8 +19,12 @@ public class UserSessionServiceAsyncJSON implements UserSessionServiceAsync {
     public void create(String name, String password, final AsyncCallback<UserSession> callback) {
 	String url = URL + ".json";
 	RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
+	builder.setHeader("Content-type", "application/x-www-form-urlencoded");
+	Params p = new Params();
+	p.put("user[name]", name);
+	p.put("user[password]", password);
 	try {
-	    builder.sendRequest("", new RequestCallback() {
+	    builder.sendRequest(p.toString(), new RequestCallback() {
 		@Override
 		public void onError(Request request, Throwable exception) {
 		    callback.onFailure(exception);

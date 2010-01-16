@@ -1,5 +1,6 @@
 package net.zaszas.booka.client;
 
+import net.zaszas.booka.core.client.session.SessionManager;
 import net.zaszas.booka.ui.client.app.BookaAppView;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -13,6 +14,10 @@ public class BookaEntryPoint implements EntryPoint {
     public void onModuleLoad() {
 	GWT.log("Loading...", null);
 	BookaGinjector injector = GWT.create(BookaGinjector.class);
+
+	SessionManager sessionManager = injector.getSessionManager();
+	sessionManager.login("Test", "secret");
+
 	BookaAppView bookaApp = injector.getBookaAppView();
 	RootLayoutPanel.get().add((Widget) bookaApp);
 	GWT.log("Loading complete.", null);

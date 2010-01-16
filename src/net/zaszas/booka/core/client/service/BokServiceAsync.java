@@ -5,10 +5,35 @@ import net.zaszas.booka.core.client.model.BokSearchResults;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * The asyc part of the Bok Service.
+ * 
+ * Usually you will use BokManager instead
+ * 
+ * @see BokManager
+ */
 public interface BokServiceAsync {
-    void create(Bok bok, AsyncCallback<Bok> callback);
+    /**
+     * Create a new bok
+     * @param params TODO
+     * @param bok
+     * @param callback
+     */
+    void create(Params params, Bok bok, AsyncCallback<Bok> callback);
 
+    /**
+     * Get a bok with the given id
+     * 
+     * @param id
+     * @param callback
+     */
     void get(String id, AsyncCallback<Bok> callback);
 
+    /**
+     * Search for a list of boks with a given query
+     * 
+     * @param query
+     * @param callback
+     */
     void search(BokQuery query, AsyncCallback<BokSearchResults> callback);
 }

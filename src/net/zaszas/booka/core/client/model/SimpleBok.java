@@ -1,82 +1,88 @@
 package net.zaszas.booka.core.client.model;
 
-public class DelegatedBok implements Bok {
-    protected final Bok delegate;
+public class SimpleBok implements Bok {
 
-    public DelegatedBok(Bok delegate, String bokType) {
-	this.delegate = delegate;
-	assert bokType.equals(delegate.getBokType()) : "Bok type doesn't match! (" + bokType + " != "
-		+ delegate.getBokType() + ")";
-    }
+    private String body;
+    private String bokType;
+    private String description;
+    private int id;
+    private int parentId;
+    private String title;
+    private int userId;
+    private String userName;
 
     @Override
     public String getBody() {
-	return delegate.getBody();
+	return this.body;
     }
 
     @Override
     public String getBokType() {
-	return delegate.getBokType();
+	return this.bokType;
     }
 
     @Override
     public String getDescription() {
-	return delegate.getDescription();
+	return this.description;
     }
 
     @Override
     public int getId() {
-	return delegate.getId();
+	return this.id;
     }
 
     @Override
     public int getParentId() {
-	return delegate.getParentId();
+	return this.parentId;
     }
 
     @Override
     public String getTitle() {
-	return delegate.getTitle();
+	return this.title;
     }
 
     @Override
     public int getUserId() {
-	return delegate.getUserId();
+	return this.userId;
     }
 
     @Override
     public String getUserName() {
-	return delegate.getUserName();
+	return this.userName;
     }
 
     @Override
     public void setBody(String body) {
-	delegate.setBody(body);
+	this.body = body;
     }
 
     @Override
     public void setBokType(String type) {
-	assert false : "Only subclasess can change bok type";
+	this.bokType = type;
     }
 
     @Override
     public void setDescription(String text) {
-	delegate.setDescription(text);
+	this.description = text;
     }
 
     @Override
     public void setParentId(int id) {
-	delegate.setParentId(id);
+	this.parentId = id;
     }
 
     @Override
     public void setTitle(String title) {
-	delegate.setTitle(title);
+	this.title = title;
     }
 
     @Override
     public void setUserId(int id) {
-	delegate.setUserId(id);
+	userId = id;
+    }
+
+    public void setUserName(String userName) {
+	this.userName = userName;
     }
 
 }

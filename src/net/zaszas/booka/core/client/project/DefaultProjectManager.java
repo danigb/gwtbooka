@@ -6,37 +6,33 @@ import java.util.List;
 import net.zaszas.booka.core.client.event.Collector;
 import net.zaszas.booka.core.client.event.Listener;
 import net.zaszas.booka.core.client.model.BokSearchResults;
+import net.zaszas.booka.core.client.service.BokManager;
 import net.zaszas.booka.core.client.service.BokQuery;
-import net.zaszas.booka.core.client.service.BokServiceAsync;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
 public class DefaultProjectManager implements ProjectManager {
 
     Collector<List<Project>> onProjects = new Collector<List<Project>>();
-    private final BokServiceAsync service;
+    private final BokManager manager;
 
     @Inject
-    public DefaultProjectManager(BokServiceAsync service) {
-	this.service = service;
+    public DefaultProjectManager(BokManager manager) {
+	this.manager = manager;
     }
 
     @Override
     public void getProjectList() {
 	BokQuery query = new BokQuery();
 	query.bokTypeEquals(Project.TYPE);
-	service.search(query, new AsyncCallback<BokSearchResults>() {
-	    @Override
-	    public void onFailure(Throwable caught) {
-	    }
+	manager.search(query, new Listener<BokSearchResults>() {
 
 	    @Override
-	    public void onSuccess(BokSearchResults result) {
+	    public void handle(BokSearchResults results) {
 		ArrayList<Project> list = new ArrayList<Project>();
-		int total = result.getSize();
+		int total = results.getSize();
 		for (int index = 0; index < total; index++) {
-		    list.add(new Project(result.get(index)));
+		    list.add(new Project(results.get(index)));
 		}
 		fireProjectList(list);
 	    }

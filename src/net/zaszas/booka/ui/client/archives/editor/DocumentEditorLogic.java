@@ -31,12 +31,14 @@ public class DocumentEditorLogic {
 		    clipView.setClip(clip);
 		    view.add(clipView);
 		}
+		view.setDocumentVisible(true);
 	    }
 	});
     }
 
     public void setView(DocumentEditorView view) {
 	this.view = view;
+	view.setDocumentVisible(current != null);
     }
 
 }

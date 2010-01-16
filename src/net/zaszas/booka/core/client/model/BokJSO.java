@@ -43,6 +43,16 @@ public class BokJSO extends JavaScriptObject implements Bok {
     }-*/;
 
     @Override
+    public final native int getUserId() /*-{
+        return this.bok.user_id;
+    }-*/;
+
+    @Override
+    public final native String getUserName() /*-{
+        return this.bok.user_name;
+    }-*/;
+
+    @Override
     public final native void setBody(String body) /*-{
         this.bok.body= body;
     }-*/;
@@ -65,5 +75,10 @@ public class BokJSO extends JavaScriptObject implements Bok {
     @Override
     public final native void setTitle(String title) /*-{
         this.bok.title = title;
+    }-*/;
+
+    @Override
+    public final native void setUserId(int id) /*-{
+        this.bok.user_id = id;
     }-*/;
 }
