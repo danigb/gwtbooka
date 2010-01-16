@@ -14,6 +14,10 @@ import net.zaszas.booka.ui.client.archives.editor.DocumentEditorView;
 import net.zaszas.booka.ui.client.archives.editor.DocumentEditorWidget;
 import net.zaszas.booka.ui.client.archives.editor.clip.ClipViewerView;
 import net.zaszas.booka.ui.client.archives.editor.clip.ClipViewerWidget;
+import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyEditorView;
+import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyEditorWidget;
+import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyViewerView;
+import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyViewerWidget;
 import net.zaszas.booka.ui.client.entrance.EntranceView;
 import net.zaszas.booka.ui.client.entrance.EntranceWidget;
 import net.zaszas.booka.ui.client.project.ProjectListView;
@@ -43,6 +47,8 @@ public class BookaUIModule extends AbstractGinModule {
 	bind(DocumentCommentsView.class).to(DocumentCommentsWidget.class);
 	bind(DocumentEditorView.class).to(DocumentEditorWidget.class);
 	bind(ClipViewerView.class).to(ClipViewerWidget.class);
+	bind(DocumentPropertyViewerView.class).to(DocumentPropertyViewerWidget.class);
+	bind(DocumentPropertyEditorView.class).to(DocumentPropertyEditorWidget.class);
 
 	// registry
 	bind(ViewRegistry.class).to(DefaultViewRegistry.class).in(Singleton.class);

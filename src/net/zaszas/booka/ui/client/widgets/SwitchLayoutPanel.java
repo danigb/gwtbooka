@@ -1,4 +1,4 @@
-package net.zaszas.booka.ui.client.slider;
+package net.zaszas.booka.ui.client.widgets;
 
 import static com.google.gwt.dom.client.Style.Unit.PCT;
 import static com.google.gwt.dom.client.Style.Unit.PX;
@@ -10,12 +10,12 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class SlideLayoutPanel extends Composite implements SlideView {
+public class SwitchLayoutPanel extends Composite implements SwitchLayoutView {
 
     private final LayoutPanel panel;
     private View currentView;
 
-    public SlideLayoutPanel() {
+    public SwitchLayoutPanel() {
 	panel = new LayoutPanel();
 	initWidget(panel);
 	currentView = null;

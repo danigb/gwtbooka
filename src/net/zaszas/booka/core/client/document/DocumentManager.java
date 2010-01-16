@@ -9,9 +9,11 @@ public interface DocumentManager {
 
     public void getDocumentClips(Document document);
 
-    public void getDocuments(Project project);
+    public void getProjectDocuments(Project project);
 
     public void onProjectDocuments(Listener<ProjectDocuments> listener);
+
+    public void update(Document document);
 
     void onDocumentsClips(Listener<DocumentClips> listener);
 }

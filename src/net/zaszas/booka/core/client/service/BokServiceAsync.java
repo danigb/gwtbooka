@@ -19,7 +19,7 @@ public interface BokServiceAsync {
      * @param bok
      * @param callback
      */
-    void create(Params params, Bok bok, AsyncCallback<Bok> callback);
+    void post(Params params, Bok bok, AsyncCallback<Bok> callback);
 
     /**
      * Get a bok with the given id

@@ -2,8 +2,8 @@ package net.zaszas.booka.ui.client.app;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 import net.zaszas.booka.ui.client.View;
-import net.zaszas.booka.ui.client.slider.SlideLayoutPanel;
-import net.zaszas.booka.ui.client.slider.SlideView.Transition;
+import net.zaszas.booka.ui.client.widgets.SwitchLayoutPanel;
+import net.zaszas.booka.ui.client.widgets.SwitchLayoutView.Transition;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -27,13 +27,13 @@ public class BookaAppWidget extends Composite implements BookaAppView {
     @UiField
     LayoutPanel center;
 
-    private final SlideLayoutPanel slideLayout;
+    private final SwitchLayoutPanel slideLayout;
 
     @Inject
     public BookaAppWidget(BookaAppLogic logic, NavigationView navigationView) {
 	logic.setView(this);
 	initWidget(uiBinder.createAndBindUi(this));
-	this.slideLayout = new SlideLayoutPanel();
+	this.slideLayout = new SwitchLayoutPanel();
 	north.setWidget((Widget) navigationView);
 	center.add(slideLayout);
 	center.setWidgetLeftRight(slideLayout, 0, PX, 0, PX);

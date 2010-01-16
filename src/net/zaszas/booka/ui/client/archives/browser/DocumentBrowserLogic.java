@@ -42,7 +42,7 @@ public class DocumentBrowserLogic {
 	Project currentProject = currentDocuments.getProject();
 	Document document = currentProject.newDocument("Sin título");
 	documentManager.createDocument(document);
-	documentManager.getDocuments(currentProject);
+	documentManager.getProjectDocuments(currentProject);
     }
 
     public void setView(DocumentBrowserView view) {

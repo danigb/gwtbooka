@@ -28,25 +28,6 @@ public class BokManagerService implements BokManager {
     }
 
     @Override
-    public void create(Bok bok, final Listener<Bok> listener) {
-	assert session.isLoggedIn() : "You can't post without logged in first.";
-	Params p = new Params().With("authenticity_token", session.getAuthToken());
-	bok.setUserId(session.getUserId());
-
-	service.create(p, bok, new AsyncCallback<Bok>() {
-	    @Override
-	    public void onFailure(Throwable caught) {
-		fireFailure(caught);
-	    }
-
-	    @Override
-	    public void onSuccess(Bok result) {
-		listener.handle(result);
-	    }
-	});
-    }
-
-    @Override
     public void get(String id, final Listener<Bok> listener) {
 	service.get(id, new AsyncCallback<Bok>() {
 	    @Override
@@ -67,6 +48,16 @@ public class BokManagerService implements BokManager {
     }
 
     @Override
+    public void post(Bok bok, final Listener<Bok> listener) {
+	send(bok, listener, new Params());
+    }
+
+    @Override
+    public void put(Bok bok, final Listener<Bok> listener) {
+	send(bok, listener, new Params().With("_method", "put"));
+    }
+
+    @Override
     public void search(BokQuery query, final Listener<BokSearchResults> listener) {
 	service.search(query, new AsyncCallback<BokSearchResults>() {
 	    @Override
@@ -76,6 +67,24 @@ public class BokManagerService implements BokManager {
 
 	    @Override
 	    public void onSuccess(BokSearchResults result) {
+		listener.handle(result);
+	    }
+	});
+    }
+
+    private void send(Bok bok, final Listener<Bok> listener, Params p) {
+	assert session.isLoggedIn() : "You can't post without logged in first.";
+	p.put("authenticity_token", session.getAuthToken());
+	bok.setUserId(session.getUserId());
+
+	service.post(p, bok, new AsyncCallback<Bok>() {
+	    @Override
+	    public void onFailure(Throwable caught) {
+		fireFailure(caught);
+	    }
+
+	    @Override
+	    public void onSuccess(Bok result) {
 		listener.handle(result);
 	    }
 	});

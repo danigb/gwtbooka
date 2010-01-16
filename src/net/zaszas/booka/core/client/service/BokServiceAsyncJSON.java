@@ -21,7 +21,7 @@ public class BokServiceAsyncJSON implements BokServiceAsync {
     private static final String URL = "/data/boks";
 
     @Override
-    public void create(Params params, Bok bok, final AsyncCallback<Bok> callback) {
+    public void post(Params params, Bok bok, final AsyncCallback<Bok> callback) {
 	String url = URL + ".json";
 	RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
 	builder.setHeader("Content-type", "application/x-www-form-urlencoded");

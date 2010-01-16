@@ -13,6 +13,7 @@ public class BookaEntryPoint implements EntryPoint {
     @Override
     public void onModuleLoad() {
 	GWT.log("Loading...", null);
+
 	BookaGinjector injector = GWT.create(BookaGinjector.class);
 
 	SessionManager sessionManager = injector.getSessionManager();

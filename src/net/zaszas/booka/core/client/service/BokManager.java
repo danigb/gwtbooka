@@ -10,11 +10,13 @@ import net.zaszas.booka.core.client.model.BokSearchResults;
  * 
  */
 public interface BokManager {
-    void create(Bok bok, Listener<Bok> listener);
-
     void get(String id, Listener<Bok> listener);
 
     void onFailure(Listener<Throwable> listener);
+
+    void post(Bok bok, Listener<Bok> listener);
+
+    void put(Bok bok, Listener<Bok> listener);
 
     void search(BokQuery query, Listener<BokSearchResults> listener);
 }

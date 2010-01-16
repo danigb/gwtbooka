@@ -31,7 +31,7 @@ public class ProjectListLogic {
     }
 
     public void onProjectClicked(Project project) {
-	documents.getDocuments(project);
+	documents.getProjectDocuments(project);
     }
 
     public void setView(ProjectListView view) {

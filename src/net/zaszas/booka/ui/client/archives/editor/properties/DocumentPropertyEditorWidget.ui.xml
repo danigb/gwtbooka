@@ -1,0 +1,23 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style field="booka" src="../../../BookaForms.css" />
+		
+	<ui:style>
+		
+	</ui:style>
+	<g:HTMLPanel styleName="{booka.form}">
+		<div class="{booka.form-block}">
+			<label class="{booka.form-label}">Title:</label>
+			<g:TextBox ui:field="title" styleName="{booka.form-field}">Título</g:TextBox>
+		</div>
+		<div class="{booka.form-block}">
+			<label class="{booka.form-label}">Title:</label>
+			<g:TextArea ui:field="description" styleName="{booka.form-field}">Título</g:TextArea>
+		</div>
+		<div class="{booka.form-block} {booka.form-block-actions}">
+			<g:Anchor ui:field="save" styleName="{booka.form-action} action">Modificar</g:Anchor>
+			<g:Anchor ui:field="cancel" styleName="{booka.form-action} action">Cancelar</g:Anchor>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,51 @@
+@def azul #00AEEF;
+@def azulclaro #E1EBEF;
+
+.form {
+	font-family: sans;
+	background-color: azulclaro;
+	border: 1px solid azul;
+	padding: 0.5em 0;
+	margin: 0;
+	width: 100%;
+	overflow: hidden;
+}
+
+.form-block {
+	width: 100%;
+	overflow: hidden;
+	margin: 3px 10px;
+}
+.form-block-actions {
+	margin-left: 25%;
+}
+
+.form-label {
+	display: block;
+	float: left;
+	width: 20%;
+	text-align: right;
+	margin-right: 5%;
+	color: white;
+}
+
+.form-field {
+	border: 1px solid white;
+	padding: 0;
+	color: black;
+	width: 15em;
+	width: 50%;
+}
+
+.form-action {
+	display: block;
+	float: left;
+	cursor: pointer;
+	padding: 0.2em 1em;
+	margin: 1px 0 0 3px;
+	color: white;
+	background-color: azul;
+	color: white;
+	font-size: 80%;
+    -moz-border-radius: 0.5em;
+}

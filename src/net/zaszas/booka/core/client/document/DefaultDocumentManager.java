@@ -14,17 +14,19 @@ public class DefaultDocumentManager implements DocumentManager {
     private final BokManager manager;
     private final Collector<ProjectDocuments> onDocuments;
     private final Collector<DocumentClips> onClips;
+    private final Collector<Document> onSaved;
 
     @Inject
     public DefaultDocumentManager(BokManager manager) {
 	this.manager = manager;
 	this.onDocuments = new Collector<ProjectDocuments>();
 	this.onClips = new Collector<DocumentClips>();
+	this.onSaved = new Collector<Document>();
     }
 
     @Override
     public void createDocument(final Document document) {
-	manager.create(document, new Listener<Bok>() {
+	manager.post(document, new Listener<Bok>() {
 	    @Override
 	    public void handle(Bok bok) {
 		Document document = new Document(bok);
@@ -47,7 +49,7 @@ public class DefaultDocumentManager implements DocumentManager {
     }
 
     @Override
-    public void getDocuments(final Project project) {
+    public void getProjectDocuments(final Project project) {
 	BokQuery query = new BokQuery();
 	query.bokTypeEquals(Document.TYPE);
 	query.bokParentEquals(project.getId());
@@ -67,6 +69,16 @@ public class DefaultDocumentManager implements DocumentManager {
     @Override
     public void onProjectDocuments(Listener<ProjectDocuments> listener) {
 	onDocuments.add(listener);
+    }
+
+    @Override
+    public void update(Document document) {
+	manager.put(document, new Listener<Bok>() {
+	    @Override
+	    public void handle(Bok bok) {
+		onSaved.fire(new Document(bok));
+	    }
+	});
     }
 
 }

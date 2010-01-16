@@ -1,8 +1,8 @@
-package net.zaszas.booka.ui.client.slider;
+package net.zaszas.booka.ui.client.widgets;
 
 import net.zaszas.booka.ui.client.View;
 
-public interface SlideView {
+public interface SwitchLayoutView {
 
     public static enum Transition {
 	slideRight

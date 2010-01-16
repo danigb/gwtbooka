@@ -1,13 +1,17 @@
 package net.zaszas.booka.ui.client.archives.editor;
 
+import net.zaszas.booka.core.client.document.Document;
+import net.zaszas.booka.ui.client.View;
 import net.zaszas.booka.ui.client.archives.editor.clip.ClipView;
+import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyEditorView;
+import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyViewerView;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
@@ -19,15 +23,19 @@ public class DocumentEditorWidget extends Composite implements DocumentEditorVie
     private static DocumentEditorWidgetUiBinder uiBinder = GWT.create(DocumentEditorWidgetUiBinder.class);
 
     @UiField
-    Label title, description;
-
-    @UiField
     FlowPanel content, page;
 
+    @UiField
+    SimplePanel properties;
+
+    private final DocumentEditorLogic logic;
+
     @Inject
-    public DocumentEditorWidget(DocumentEditorLogic logic) {
+    public DocumentEditorWidget(DocumentEditorLogic logic, DocumentPropertyViewerView propertyViewer,
+	    DocumentPropertyEditorView propertyEditor) {
+	this.logic = logic;
 	initWidget(uiBinder.createAndBindUi(this));
-	logic.setView(this);
+	logic.setViews(this, propertyViewer, propertyEditor);
     }
 
     @Override
@@ -46,18 +54,18 @@ public class DocumentEditorWidget extends Composite implements DocumentEditorVie
     }
 
     @Override
-    public void setDocumentDescription(String text) {
-	description.setText(text);
-    }
-
-    @Override
-    public void setDocumentTitle(String text) {
-	title.setText(text);
+    public void setDocument(Document document) {
+	logic.setDocument(document);
     }
 
     @Override
     public void setDocumentVisible(boolean visible) {
 	page.setVisible(visible);
+    }
+
+    @Override
+    public void setPropertiesView(View view) {
+	properties.setWidget((Widget) view);
     }
 
 }
