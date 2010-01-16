@@ -28,7 +28,8 @@ public class BookaAppWidget extends Composite implements BookaAppView {
     private final SlideLayoutPanel slideLayout;
 
     @Inject
-    public BookaAppWidget(NavigationView navigationView) {
+    public BookaAppWidget(BookaAppLogic logic, NavigationView navigationView) {
+	logic.setView(this);
 	initWidget(uiBinder.createAndBindUi(this));
 	this.slideLayout = new SlideLayoutPanel();
 	north.setWidget((Widget) navigationView);

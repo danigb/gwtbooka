@@ -5,7 +5,7 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class DocumentCommentsWidget extends Composite {
+public class DocumentCommentsWidget extends Composite implements DocumentCommentsView {
 
     interface DocumentCommentsWidgetUiBinder extends UiBinder<Widget, DocumentCommentsWidget> {
     }

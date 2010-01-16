@@ -1,57 +1,56 @@
 package net.zaszas.booka.ui.client.app;
 
-import net.zaszas.booka.ui.client.BookaUIGinjector;
-import net.zaszas.booka.ui.client.Router;
+import java.util.List;
+
+import net.zaszas.booka.core.client.document.DocumentManager;
+import net.zaszas.booka.core.client.document.ProjectDocuments;
+import net.zaszas.booka.core.client.event.Listener;
+import net.zaszas.booka.core.client.project.Project;
+import net.zaszas.booka.core.client.project.ProjectManager;
 import net.zaszas.booka.ui.client.archives.ArchivesView;
 import net.zaszas.booka.ui.client.entrance.EntranceView;
+import net.zaszas.booka.ui.client.register.ViewProvider;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.History;
+import com.google.inject.Inject;
 
 public class BookaAppLogic {
-    private final BookaUIGinjector injector;
-    private final BookaAppView view;
-    private EntranceView entrance;
-    private ArchivesView archives;
 
-    public BookaAppLogic(BookaUIGinjector injector, BookaAppView view) {
-	this.injector = injector;
-	this.view = view;
+    private BookaAppWidget view;
+    private String currentViewKey;
+    private final ProjectManager projects;
 
-	GWT.log("Starting logic", null);
-	History.addValueChangeHandler(new ValueChangeHandler<String>() {
+    @Inject
+    public BookaAppLogic(final ViewProvider provider, ProjectManager projects, DocumentManager documents) {
+	this.projects = projects;
+	this.currentViewKey = null;
+
+	projects.onProjectList(new Listener<List<Project>>() {
 	    @Override
-	    public void onValueChange(ValueChangeEvent<String> event) {
-		handleToken(event.getValue());
+	    public void handle(List<Project> object) {
+		currentViewKey = EntranceView.KEY;
+		view.show(provider.get(currentViewKey));
 	    }
 	});
-	History.fireCurrentHistoryState();
+
+	documents.onProjectDocuments(new Listener<ProjectDocuments>() {
+	    @Override
+	    public void handle(ProjectDocuments documents) {
+		currentViewKey = ArchivesView.KEY;
+		view.show(provider.get(currentViewKey));
+	    }
+	});
+
+	new HistoryManager(this);
     }
 
-    public void handleToken(String token) {
-	if (token.matches(Router.REGEX_HOME) || token.matches(Router.REGEX_ENTRANCE)) {
-	    view.show(getEntrance());
-	    entrance.loadProjects();
-	} else if (token.matches(Router.REGEX_ARCHIVES)) {
-	    view.show(getArchives());
-	    archives.loadProject(Router.getProjectFromArchives(token));
+    public void loadProjects() {
+	if (currentViewKey != EntranceView.KEY) {
+	    projects.getProjectList();
 	}
     }
 
-    private ArchivesView getArchives() {
-	if (this.archives == null) {
-	    this.archives = injector.getArchivesView();
-	}
-	return this.archives;
-    }
-
-    private EntranceView getEntrance() {
-	if (this.entrance == null) {
-	    this.entrance = injector.getEntranceView();
-	}
-	return entrance;
+    public void setView(BookaAppWidget view) {
+	this.view = view;
     }
 
 }

@@ -1,0 +1,30 @@
+package net.zaszas.booka.core.client.document;
+
+import java.util.ArrayList;
+
+import net.zaszas.booka.core.client.model.BokSearchResults;
+import net.zaszas.booka.core.client.project.Project;
+
+public class ProjectDocuments {
+
+    private final Project project;
+    private final ArrayList<Document> list;
+
+    public ProjectDocuments(Project project, BokSearchResults results) {
+	this.project = project;
+	this.list = new ArrayList<Document>();
+	setResults(results);
+    }
+
+    public Project getProject() {
+	return project;
+    }
+
+    private void setResults(BokSearchResults results) {
+	list.clear();
+	int total = results.getSize();
+	for (int index = 0; index < total; index++) {
+	    list.add(new Document(results.get(index)));
+	}
+    }
+}

@@ -2,21 +2,22 @@ package net.zaszas.booka.ui.client.project;
 
 import java.util.List;
 
+import net.zaszas.booka.core.client.document.DocumentManager;
 import net.zaszas.booka.core.client.event.Listener;
 import net.zaszas.booka.core.client.project.Project;
 import net.zaszas.booka.core.client.project.ProjectManager;
-import net.zaszas.booka.ui.client.Router;
 
-import com.google.gwt.user.client.History;
 import com.google.inject.Inject;
 
 public class ProjectListLogic {
 
     private ProjectListView view;
+    private final DocumentManager documents;
 
     @Inject
-    public ProjectListLogic(ProjectManager manager) {
-	manager.onProjectList(new Listener<List<Project>>() {
+    public ProjectListLogic(ProjectManager projects, DocumentManager documents) {
+	this.documents = documents;
+	projects.onProjectList(new Listener<List<Project>>() {
 	    @Override
 	    public void handle(List<Project> projects) {
 		view.clearList();
@@ -30,8 +31,7 @@ public class ProjectListLogic {
     }
 
     public void onProjectClicked(Project project) {
-	History.newItem(Router.project_path(project.getId()));
-
+	documents.getDocuments(project);
     }
 
     public void setView(ProjectListView view) {

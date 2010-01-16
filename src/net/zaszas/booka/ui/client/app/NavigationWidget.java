@@ -12,12 +12,10 @@ public class NavigationWidget extends Composite implements NavigationView {
     }
 
     private static NavigationWidgetUiBinder uiBinder = GWT.create(NavigationWidgetUiBinder.class);
-    private final NavigationLogic logic;
 
     @Inject
     public NavigationWidget(NavigationLogic logic) {
 	logic.setView(this);
-	this.logic = logic;
 	initWidget(uiBinder.createAndBindUi(this));
     }
 

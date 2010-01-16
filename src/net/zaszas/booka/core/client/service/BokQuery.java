@@ -11,6 +11,10 @@ public class BokQuery {
 	query = new HashMap<String, String>();
     }
 
+    public void bokParentEquals(int id) {
+	query.put("parent_id_equals", "" + id);
+    }
+
     public void bokTypeEquals(String bokType) {
 	query.put("username_equals", bokType);
     }

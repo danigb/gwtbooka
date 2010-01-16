@@ -14,8 +14,12 @@ import net.zaszas.booka.ui.client.entrance.EntranceView;
 import net.zaszas.booka.ui.client.entrance.EntranceWidget;
 import net.zaszas.booka.ui.client.project.ProjectListView;
 import net.zaszas.booka.ui.client.project.ProjectListWidget;
+import net.zaszas.booka.ui.client.register.DefaultViewRegistry;
+import net.zaszas.booka.ui.client.register.ViewRegister;
+import net.zaszas.booka.ui.client.register.ViewRegistry;
 
 import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.inject.Singleton;
 
 public class BookaUIModule extends AbstractGinModule {
 
@@ -32,6 +36,9 @@ public class BookaUIModule extends AbstractGinModule {
 	bind(ArchivesView.class).to(ArchivesWidget.class);
 	bind(DocumentBrowserView.class).to(DocumentBrowserWidget.class);
 	bind(DocumentCommentsView.class).to(DocumentCommentsWidget.class);
+
+	bind(ViewRegistry.class).to(DefaultViewRegistry.class).in(Singleton.class);
+	bind(ViewRegister.class).asEagerSingleton();
     }
 
 }
