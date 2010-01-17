@@ -29,6 +29,10 @@ public class DelegatedBok implements Bok {
 	return delegate.getId();
     }
 
+    public String getIdString() {
+	return "" + getId();
+    }
+
     @Override
     public int getParentId() {
 	return delegate.getParentId();

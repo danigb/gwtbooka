@@ -5,6 +5,7 @@ import net.zaszas.booka.core.client.event.Listener;
 import net.zaszas.booka.core.client.model.Bok;
 import net.zaszas.booka.core.client.model.BokSearchResults;
 import net.zaszas.booka.core.client.session.SessionManager;
+import net.zaszas.rest.client.Params;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;

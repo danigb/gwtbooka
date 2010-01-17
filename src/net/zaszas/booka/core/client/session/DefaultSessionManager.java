@@ -3,21 +3,27 @@ package net.zaszas.booka.core.client.session;
 import net.zaszas.booka.core.client.event.Collector;
 import net.zaszas.booka.core.client.event.Listener;
 import net.zaszas.booka.core.client.model.UserSession;
-import net.zaszas.booka.core.client.service.UserSessionServiceAsync;
+import net.zaszas.booka.core.client.model.UserSessionJSO;
+import net.zaszas.booka.core.client.service.RestCallback;
+import net.zaszas.booka.core.client.service.RestManager;
+import net.zaszas.rest.client.Params;
 
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.inject.Inject;
 
 public class DefaultSessionManager implements SessionManager {
-    private final UserSessionServiceAsync service;
+    private static final String RESOURCE = "user_sessions";
+    private static final String JSON = "json";
+
     private final Collector<SessionManager> onLoggedIn;
     private final Collector<SessionManager> onLoggedOut;
     private String authToken;
     private UserSession userSession;
+    private final RestManager manager;
 
     @Inject
-    public DefaultSessionManager(UserSessionServiceAsync service) {
-	this.service = service;
+    public DefaultSessionManager(RestManager manager) {
+	this.manager = manager;
 	this.onLoggedIn = new Collector<SessionManager>();
 	this.onLoggedOut = new Collector<SessionManager>();
 	this.authToken = null;
@@ -47,16 +53,12 @@ public class DefaultSessionManager implements SessionManager {
 
     @Override
     public void login(String name, String password) {
-	service.create(name, password, new AsyncCallback<UserSession>() {
+	Params params = new Params().With("user[name]", name).With("user[password]", password);
+	manager.create("session.create", RESOURCE, params, JSON, new RestCallback() {
 	    @Override
-	    public void onFailure(Throwable caught) {
-	    }
-
-	    @Override
-	    public void onSuccess(UserSession session) {
-		authToken = session.getToken();
-		userSession = session;
-		fireLoggedIn();
+	    public void onSuccess(String text) {
+		UserSessionJSO userSessionJSO = JsonUtils.unsafeEval(text);
+		handleUserSession(userSessionJSO);
 	    }
 	});
     }
@@ -84,6 +86,12 @@ public class DefaultSessionManager implements SessionManager {
 
     protected void fireLoggedOut() {
 	onLoggedOut.fire(this);
+    }
+
+    protected void handleUserSession(UserSession session) {
+	authToken = session.getToken();
+	userSession = session;
+	fireLoggedIn();
     }
 
 }

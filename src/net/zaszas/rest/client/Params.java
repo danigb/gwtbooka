@@ -1,4 +1,4 @@
-package net.zaszas.booka.core.client.service;
+package net.zaszas.rest.client;
 
 import com.google.gwt.http.client.URL;
 

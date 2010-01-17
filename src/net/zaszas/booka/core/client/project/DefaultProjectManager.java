@@ -5,19 +5,24 @@ import java.util.List;
 
 import net.zaszas.booka.core.client.event.Collector;
 import net.zaszas.booka.core.client.event.Listener;
-import net.zaszas.booka.core.client.model.BokSearchResults;
-import net.zaszas.booka.core.client.service.BokManager;
+import net.zaszas.booka.core.client.model.BokSearchResultsJSO;
+import net.zaszas.booka.core.client.service.AuthorizedRestManager;
 import net.zaszas.booka.core.client.service.BokQuery;
+import net.zaszas.booka.core.client.service.RestCallback;
+import net.zaszas.booka.core.client.service.RestManager;
 
+import com.google.gwt.core.client.JsonUtils;
 import com.google.inject.Inject;
 
 public class DefaultProjectManager implements ProjectManager {
+    private static final String RESOURCE = "boks";
+    private static final String FORMAT = "json";
 
     Collector<List<Project>> onProjects = new Collector<List<Project>>();
-    private final BokManager manager;
+    private final RestManager manager;
 
     @Inject
-    public DefaultProjectManager(BokManager manager) {
+    public DefaultProjectManager(AuthorizedRestManager manager) {
 	this.manager = manager;
     }
 
@@ -25,16 +30,11 @@ public class DefaultProjectManager implements ProjectManager {
     public void getProjectList() {
 	BokQuery query = new BokQuery();
 	query.bokTypeEquals(Project.TYPE);
-	manager.search(query, new Listener<BokSearchResults>() {
 
+	manager.getList("projects.list", RESOURCE, query.toParams(), FORMAT, new RestCallback() {
 	    @Override
-	    public void handle(BokSearchResults results) {
-		ArrayList<Project> list = new ArrayList<Project>();
-		int total = results.getSize();
-		for (int index = 0; index < total; index++) {
-		    list.add(new Project(results.get(index)));
-		}
-		fireProjectList(list);
+	    public void onSuccess(String text) {
+		handleResults(JsonUtils.<BokSearchResultsJSO> unsafeEval(text));
 	    }
 	});
 
@@ -47,6 +47,15 @@ public class DefaultProjectManager implements ProjectManager {
 
     protected void fireProjectList(ArrayList<Project> list) {
 	onProjects.fire(list);
+    }
+
+    protected void handleResults(BokSearchResultsJSO results) {
+	ArrayList<Project> list = new ArrayList<Project>();
+	int total = results.getSize();
+	for (int index = 0; index < total; index++) {
+	    list.add(new Project(results.get(index)));
+	}
+	fireProjectList(list);
     }
 
 }

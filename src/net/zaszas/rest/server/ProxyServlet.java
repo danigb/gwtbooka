@@ -1,4 +1,4 @@
-package net.zaszas.booka.server;
+package net.zaszas.rest.server;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

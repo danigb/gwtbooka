@@ -2,45 +2,44 @@ package net.zaszas.booka.core.client.service;
 
 import net.zaszas.booka.core.client.model.UserSession;
 import net.zaszas.booka.core.client.model.UserSessionJSO;
+import net.zaszas.rest.client.Params;
+import net.zaszas.rest.client.RestServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Inject;
 
 public class UserSessionServiceAsyncJSON implements UserSessionServiceAsync {
-    private static final String URL = "/data/user_sessions";
+    private static final String RESOURCE = "user_sessions";
+    private final RestServiceAsync service;
+
+    @Inject
+    public UserSessionServiceAsyncJSON(RestServiceAsync service) {
+	this.service = service;
+    }
 
     @Override
     public void create(String name, String password, final AsyncCallback<UserSession> callback) {
-	String url = URL + ".json";
-	RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
-	builder.setHeader("Content-type", "application/x-www-form-urlencoded");
-	Params p = new Params();
-	p.put("user[name]", name);
-	p.put("user[password]", password);
-	try {
-	    builder.sendRequest(p.toString(), new RequestCallback() {
-		@Override
-		public void onError(Request request, Throwable exception) {
-		    callback.onFailure(exception);
-		}
+	Params params = new Params().With("user[name]", name).With("user[password]", password);
 
-		@Override
-		public void onResponseReceived(Request request, Response response) {
-		    String responseText = response.getText();
-		    GWT.log("CREATE user session: " + responseText, null);
-		    UserSessionJSO userSession = JsonUtils.<UserSessionJSO> unsafeEval(responseText);
-		    callback.onSuccess(userSession);
-		}
-	    });
-	} catch (RequestException e) {
-	    callback.onFailure(e);
-	}
+	service.create(RESOURCE, params, "json", new RequestCallback() {
+	    @Override
+	    public void onError(Request request, Throwable exception) {
+		callback.onFailure(exception);
+	    }
+
+	    @Override
+	    public void onResponseReceived(Request request, Response response) {
+		String responseText = response.getText();
+		GWT.log("CREATE user session: " + responseText, null);
+		UserSessionJSO userSession = JsonUtils.<UserSessionJSO> unsafeEval(responseText);
+		callback.onSuccess(userSession);
+	    }
+	});
+
     }
-
 }

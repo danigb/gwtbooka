@@ -2,6 +2,7 @@ package net.zaszas.booka.core.client.service;
 
 import net.zaszas.booka.core.client.model.Bok;
 import net.zaszas.booka.core.client.model.BokSearchResults;
+import net.zaszas.rest.client.Params;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 

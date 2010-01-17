@@ -9,4 +9,5 @@ public class Document extends DelegatedBok {
     public Document(Bok delegate) {
 	super(delegate, TYPE);
     }
+
 }

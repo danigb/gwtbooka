@@ -6,52 +6,30 @@ import net.zaszas.booka.core.client.model.Bok;
 import net.zaszas.booka.core.client.model.BokJSO;
 import net.zaszas.booka.core.client.model.BokSearchResults;
 import net.zaszas.booka.core.client.model.BokSearchResultsJSO;
+import net.zaszas.rest.client.Params;
+import net.zaszas.rest.client.RestServiceAsync;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.inject.Inject;
 
 public class BokServiceAsyncJSON implements BokServiceAsync {
 
-    private static final String URL = "/data/boks";
+    private static final String RESOURCE = "boks";
+    private final RestServiceAsync service;
 
-    @Override
-    public void post(Params params, Bok bok, final AsyncCallback<Bok> callback) {
-	String url = URL + ".json";
-	RequestBuilder builder = new RequestBuilder(RequestBuilder.POST, url);
-	builder.setHeader("Content-type", "application/x-www-form-urlencoded");
-
-	encode(bok, params);
-	try {
-	    builder.sendRequest(params.toString(), new RequestCallback() {
-		@Override
-		public void onError(Request request, Throwable exception) {
-		    handleException(exception, callback);
-		}
-
-		@Override
-		public void onResponseReceived(Request request, Response response) {
-		    handleBokResponse(response, callback);
-		}
-
-	    });
-	} catch (RequestException e) {
-	    callback.onFailure(e);
-	}
+    @Inject
+    public BokServiceAsyncJSON(RestServiceAsync service) {
+	this.service = service;
     }
 
     @Override
     public void get(String id, final AsyncCallback<Bok> callback) {
-	String url = URL + "/" + id + ".json";
-	RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
-	builder.setHeader("Content-type", "application/x-www-form-urlencoded");
-
-	builder.setCallback(new RequestCallback() {
+	service.get(RESOURCE, id, "json", new RequestCallback() {
 	    @Override
 	    public void onError(Request request, Throwable exception) {
 		handleException(exception, callback);
@@ -62,38 +40,44 @@ public class BokServiceAsyncJSON implements BokServiceAsync {
 		handleBokResponse(response, callback);
 	    }
 	});
-	try {
-	    builder.send();
-	} catch (RequestException e) {
-	    callback.onFailure(e);
-	}
+
+    }
+
+    @Override
+    public void post(Params params, Bok bok, final AsyncCallback<Bok> callback) {
+	encode(bok, params);
+	service.create(RESOURCE, params, "json", new RequestCallback() {
+	    @Override
+	    public void onError(Request request, Throwable exception) {
+		handleException(exception, callback);
+	    }
+
+	    @Override
+	    public void onResponseReceived(Request request, Response response) {
+		handleBokResponse(response, callback);
+	    }
+
+	});
     }
 
     @Override
     public void search(BokQuery query, final AsyncCallback<BokSearchResults> callback) {
 	Params p = encode(query, new Params());
-	String url = URL + ".json";
-	url += "?" + p.toString();
-	RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
 
-	try {
-	    builder.sendRequest(p.toString(), new RequestCallback() {
-		@Override
-		public void onError(Request request, Throwable exception) {
-		    callback.onFailure(exception);
-		}
+	service.getList(RESOURCE, p, "json", new RequestCallback() {
+	    @Override
+	    public void onError(Request request, Throwable exception) {
+		callback.onFailure(exception);
+	    }
 
-		@Override
-		public void onResponseReceived(Request request, Response response) {
-		    String responseText = response.getText();
-		    GWT.log("SEARCH " + responseText, null);
-		    BokSearchResultsJSO results = JsonUtils.unsafeEval(responseText);
-		    callback.onSuccess(results);
-		}
-	    });
-	} catch (RequestException e) {
-	    callback.onFailure(e);
-	}
+	    @Override
+	    public void onResponseReceived(Request request, Response response) {
+		String responseText = response.getText();
+		GWT.log("SEARCH " + responseText, null);
+		BokSearchResultsJSO results = JsonUtils.unsafeEval(responseText);
+		callback.onSuccess(results);
+	    }
+	});
 
     }
 

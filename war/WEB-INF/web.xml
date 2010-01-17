@@ -5,7 +5,7 @@
 <web-app>
     <servlet>
         <servlet-name>ProxyServlet</servlet-name>
-        <servlet-class>net.zaszas.booka.server.ProxyServlet</servlet-class>
+        <servlet-class>net.zaszas.rest.server.ProxyServlet</servlet-class>
         <init-param>
             <param-name>proxyHost</param-name>
             <param-value>localhost</param-value>
@@ -16,7 +16,7 @@
         </init-param>
         <init-param>
             <param-name>proxyPath</param-name>
-            <param-value>/data/</param-value>
+            <param-value>/proxy/</param-value>
         </init-param>
         <init-param>
             <param-name>maxFileUploadSize</param-name>
@@ -25,6 +25,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ProxyServlet</servlet-name>
-        <url-pattern>/data/*</url-pattern>
+        <url-pattern>/proxy/*</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -3,6 +3,8 @@ package net.zaszas.booka.core.client.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.zaszas.rest.client.Params;
+
 public class BokQuery {
 
     private final HashMap<String, String> query;
@@ -21,5 +23,14 @@ public class BokQuery {
 
     public Map<String, String> getMap() {
 	return query;
+    }
+
+    public Params toParams() {
+	Params p = new Params();
+	for (String key : query.keySet()) {
+	    p.put("search[" + key + "]", query.get(key));
+	}
+	return p;
+
     }
 }

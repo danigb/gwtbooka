@@ -2,22 +2,31 @@ package net.zaszas.booka.core.client.document;
 
 import net.zaszas.booka.core.client.event.Collector;
 import net.zaszas.booka.core.client.event.Listener;
-import net.zaszas.booka.core.client.model.Bok;
+import net.zaszas.booka.core.client.model.BokJSO;
 import net.zaszas.booka.core.client.model.BokSearchResults;
+import net.zaszas.booka.core.client.model.BokSearchResultsJSO;
+import net.zaszas.booka.core.client.model.BokToParams;
 import net.zaszas.booka.core.client.project.Project;
-import net.zaszas.booka.core.client.service.BokManager;
+import net.zaszas.booka.core.client.service.AuthorizedRestManager;
 import net.zaszas.booka.core.client.service.BokQuery;
+import net.zaszas.booka.core.client.service.RestCallback;
+import net.zaszas.booka.core.client.service.RestManager;
+import net.zaszas.rest.client.Params;
 
+import com.google.gwt.core.client.JsonUtils;
 import com.google.inject.Inject;
 
 public class DefaultDocumentManager implements DocumentManager {
-    private final BokManager manager;
+    private static final String RESOURCE = "boks";
+    private static final String JSON = "json";
+
     private final Collector<ProjectDocuments> onDocuments;
     private final Collector<DocumentClips> onClips;
     private final Collector<Document> onSaved;
+    private final RestManager manager;
 
     @Inject
-    public DefaultDocumentManager(BokManager manager) {
+    public DefaultDocumentManager(AuthorizedRestManager manager) {
 	this.manager = manager;
 	this.onDocuments = new Collector<ProjectDocuments>();
 	this.onClips = new Collector<DocumentClips>();
@@ -26,13 +35,16 @@ public class DefaultDocumentManager implements DocumentManager {
 
     @Override
     public void createDocument(final Document document) {
-	manager.post(document, new Listener<Bok>() {
+	Params params = BokToParams.toParams(document);
+	manager.create("documents.create", RESOURCE, params, JSON, new RestCallback() {
 	    @Override
-	    public void handle(Bok bok) {
+	    public void onSuccess(String text) {
+		BokJSO bok = JsonUtils.unsafeEval(text);
 		Document document = new Document(bok);
 		onClips.fire(new DocumentClips(document, BokSearchResults.NONE));
 	    }
 	});
+
     }
 
     @Override
@@ -40,9 +52,11 @@ public class DefaultDocumentManager implements DocumentManager {
 	BokQuery query = new BokQuery();
 	query.bokParentEquals(document.getId());
 	query.bokTypeEquals(Clip.TYPE);
-	manager.search(query, new Listener<BokSearchResults>() {
+	Params params = query.toParams();
+	manager.getList("documents.clips", RESOURCE, params, JSON, new RestCallback() {
 	    @Override
-	    public void handle(BokSearchResults results) {
+	    public void onSuccess(String text) {
+		BokSearchResultsJSO results = JsonUtils.unsafeEval(text);
 		onClips.fire(new DocumentClips(document, results));
 	    }
 	});
@@ -53,9 +67,11 @@ public class DefaultDocumentManager implements DocumentManager {
 	BokQuery query = new BokQuery();
 	query.bokTypeEquals(Document.TYPE);
 	query.bokParentEquals(project.getId());
-	manager.search(query, new Listener<BokSearchResults>() {
+
+	manager.getList("documents.documents", RESOURCE, query.toParams(), JSON, new RestCallback() {
 	    @Override
-	    public void handle(BokSearchResults results) {
+	    public void onSuccess(String text) {
+		BokSearchResultsJSO results = JsonUtils.unsafeEval(text);
 		onDocuments.fire(new ProjectDocuments(project, results));
 	    }
 	});
@@ -73,12 +89,15 @@ public class DefaultDocumentManager implements DocumentManager {
 
     @Override
     public void update(Document document) {
-	manager.put(document, new Listener<Bok>() {
+	Params params = BokToParams.toParams(document);
+	manager.update("documents.update", RESOURCE, document.getIdString(), params, JSON, new RestCallback() {
 	    @Override
-	    public void handle(Bok bok) {
-		onSaved.fire(new Document(bok));
+	    public void onSuccess(String text) {
+
 	    }
 	});
+
+	// onSaved.fire(new Document(bok));
     }
 
 }
