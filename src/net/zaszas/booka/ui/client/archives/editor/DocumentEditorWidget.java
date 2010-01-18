@@ -3,6 +3,7 @@ package net.zaszas.booka.ui.client.archives.editor;
 import net.zaszas.booka.core.client.document.Document;
 import net.zaszas.booka.ui.client.View;
 import net.zaszas.booka.ui.client.archives.editor.clip.ClipView;
+import net.zaszas.booka.ui.client.archives.editor.clip.ClipWidget;
 import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyEditorView;
 import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyViewerView;
 
@@ -39,8 +40,14 @@ public class DocumentEditorWidget extends Composite implements DocumentEditorVie
     }
 
     @Override
-    public void add(ClipView clipView) {
-	content.add((Widget) clipView);
+    public void add(View view) {
+	content.add((Widget) view);
+    }
+
+    @Override
+    public void addBefore(SlotView slot, ClipView clip) {
+	int slotIndex = content.getWidgetIndex((Widget) slot);
+	content.insert((Widget) clip, slotIndex);
     }
 
     @Override
@@ -50,7 +57,12 @@ public class DocumentEditorWidget extends Composite implements DocumentEditorVie
 
     @Override
     public ClipView createClipView() {
-	return null;
+	return new ClipWidget();
+    }
+
+    @Override
+    public SlotView createSlotView() {
+	return new SlotWidget(logic);
     }
 
     @Override

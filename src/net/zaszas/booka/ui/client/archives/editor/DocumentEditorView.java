@@ -6,11 +6,15 @@ import net.zaszas.booka.ui.client.archives.editor.clip.ClipView;
 
 public interface DocumentEditorView extends View {
 
-    void add(ClipView clipView);
+    void add(View clipView);
+
+    void addBefore(SlotView slot, ClipView clip);
 
     void clear();
 
     ClipView createClipView();
+
+    SlotView createSlotView();
 
     void setDocument(Document document);
 

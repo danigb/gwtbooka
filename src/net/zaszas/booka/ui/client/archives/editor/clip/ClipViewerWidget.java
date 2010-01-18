@@ -21,7 +21,7 @@ public class ClipViewerWidget extends Composite implements ClipViewerView {
     HTML content;
 
     @Inject
-    public ClipViewerWidget(ClipViewerLogic logic) {
+    public ClipViewerWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
     }
 

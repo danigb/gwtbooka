@@ -3,28 +3,28 @@
     PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 <web-app>
-    <servlet>
-        <servlet-name>ProxyServlet</servlet-name>
-        <servlet-class>net.zaszas.rest.server.ProxyServlet</servlet-class>
-        <init-param>
-            <param-name>proxyHost</param-name>
-            <param-value>localhost</param-value>
-        </init-param>
-        <init-param>
-            <param-name>proxyPort</param-name>
-            <param-value>3000</param-value>
-        </init-param>
-        <init-param>
-            <param-name>proxyPath</param-name>
-            <param-value>/proxy/</param-value>
-        </init-param>
-        <init-param>
-            <param-name>maxFileUploadSize</param-name>
-            <param-value></param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ProxyServlet</servlet-name>
-        <url-pattern>/proxy/*</url-pattern>
-    </servlet-mapping>
+	<servlet>
+		<servlet-name>ProxyServlet</servlet-name>
+		<servlet-class>net.zaszas.rest.server.ProxyServlet</servlet-class>
+		<init-param>
+			<param-name>proxyHost</param-name>
+			<param-value>localhost</param-value>
+		</init-param>
+		<init-param>
+			<param-name>proxyPort</param-name>
+			<param-value>3000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>proxyPath</param-name>
+			<param-value>/proxy/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>maxFileUploadSize</param-name>
+			<param-value></param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProxyServlet</servlet-name>
+		<url-pattern>/proxy/*</url-pattern>
+	</servlet-mapping>
 </web-app>

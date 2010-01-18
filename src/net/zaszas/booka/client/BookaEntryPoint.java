@@ -4,10 +4,13 @@ import net.zaszas.booka.core.client.session.SessionManager;
 import net.zaszas.booka.ui.client.app.BookaAppView;
 import net.zaszas.rest.client.RestServiceAsync;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -26,7 +29,17 @@ public class BookaEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	GWT.log("Loading...", null);
+	Log.setUncaughtExceptionHandler();
+
+	DeferredCommand.addCommand(new Command() {
+	    public void execute() {
+		onModuleLoad2();
+	    }
+	});
+    }
+
+    protected void onModuleLoad2() {
+	Log.debug("Loading...");
 
 	BookaGinjector injector = GWT.create(BookaGinjector.class);
 	RestServiceAsync restService = injector.getRestServiceAsync();
@@ -39,5 +52,6 @@ public class BookaEntryPoint implements EntryPoint {
 	BookaAppView bookaApp = injector.getBookaAppView();
 	RootLayoutPanel.get().add((Widget) bookaApp);
 	GWT.log("Loading complete.", null);
+
     }
 }

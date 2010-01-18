@@ -1,14 +1,13 @@
 package net.zaszas.booka.core.client.model;
 
 public class SimpleBok implements Bok {
-
     private String body;
     private String bokType;
     private String description;
-    private int id;
-    private int parentId;
+    private String id;
+    private String parentId;
     private String title;
-    private int userId;
+    private String userId;
     private String userName;
 
     @Override
@@ -27,12 +26,12 @@ public class SimpleBok implements Bok {
     }
 
     @Override
-    public int getId() {
+    public String getId() {
 	return this.id;
     }
 
     @Override
-    public int getParentId() {
+    public String getParentId() {
 	return this.parentId;
     }
 
@@ -42,7 +41,7 @@ public class SimpleBok implements Bok {
     }
 
     @Override
-    public int getUserId() {
+    public String getUserId() {
 	return this.userId;
     }
 
@@ -67,7 +66,7 @@ public class SimpleBok implements Bok {
     }
 
     @Override
-    public void setParentId(int id) {
+    public void setParentId(String id) {
 	this.parentId = id;
     }
 
@@ -77,7 +76,7 @@ public class SimpleBok implements Bok {
     }
 
     @Override
-    public void setUserId(int id) {
+    public void setUserId(String id) {
 	userId = id;
     }
 

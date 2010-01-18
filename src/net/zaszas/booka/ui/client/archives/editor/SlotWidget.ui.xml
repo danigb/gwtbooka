@@ -2,11 +2,10 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+		.slot {
+			display: block;
+			background-color: #efefef;
+		}
 	</ui:style>
-	<g:HTMLPanel>
-		<div>
-		<g:HTML ui:field="content">Esto debería ser un clip!</g:HTML>
-		</div>
-	</g:HTMLPanel>
+	<g:Label ui:field="slot" styleName="{style.slot} slot">Slot</g:Label>
 </ui:UiBinder> 

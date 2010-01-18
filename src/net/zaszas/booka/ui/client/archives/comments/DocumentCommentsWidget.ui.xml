@@ -11,7 +11,7 @@
 	</ui:style>
 	<g:DockLayoutPanel styleName="{style.comments}">
 		<g:center>
-			<g:Label>Nada aún</g:Label>
+			<g:Label></g:Label>
 		</g:center>
 	</g:DockLayoutPanel>
 </ui:UiBinder> 

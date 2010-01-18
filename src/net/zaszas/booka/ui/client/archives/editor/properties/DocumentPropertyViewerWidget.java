@@ -4,10 +4,8 @@ import net.zaszas.booka.core.client.document.Document;
 import net.zaszas.booka.ui.client.archives.editor.DocumentEditorLogic;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
@@ -31,7 +29,7 @@ public class DocumentPropertyViewerWidget extends Composite implements DocumentP
 
     public DocumentPropertyViewerWidget() {
 	initWidget(uiBinder.createAndBindUi(this));
-	sinkEvents(Event.ONMOUSEOVER | Event.ONMOUSEOUT);
+	sinkEvents(Event.ONMOUSEOVER | Event.ONMOUSEOUT | Event.ONCLICK);
 	edit.setVisible(false);
     }
 
@@ -39,18 +37,15 @@ public class DocumentPropertyViewerWidget extends Composite implements DocumentP
     public void onBrowserEvent(Event event) {
 	int type = event.getTypeInt();
 	if (type == Event.ONMOUSEOVER) {
-	    addStyleName("active");
-	    edit.setVisible(true);
+	    addStyleName("editable-active");
+	    // edit.setVisible(true);
 	} else if (type == Event.ONMOUSEOUT) {
-	    removeStyleName("active");
-	    edit.setVisible(false);
+	    removeStyleName("editable-active");
+	    // edit.setVisible(false);
+	} else if (type == Event.ONCLICK) {
+	    logic.onEditProperties();
 	}
 	super.onBrowserEvent(event);
-    }
-
-    @UiHandler("edit")
-    public void onEdit(ClickEvent e) {
-	logic.onEditProperties();
     }
 
     @Override

@@ -25,7 +25,7 @@ public class DelegatedBok implements Bok {
     }
 
     @Override
-    public int getId() {
+    public String getId() {
 	return delegate.getId();
     }
 
@@ -34,7 +34,7 @@ public class DelegatedBok implements Bok {
     }
 
     @Override
-    public int getParentId() {
+    public String getParentId() {
 	return delegate.getParentId();
     }
 
@@ -44,7 +44,7 @@ public class DelegatedBok implements Bok {
     }
 
     @Override
-    public int getUserId() {
+    public String getUserId() {
 	return delegate.getUserId();
     }
 
@@ -69,7 +69,7 @@ public class DelegatedBok implements Bok {
     }
 
     @Override
-    public void setParentId(int id) {
+    public void setParentId(String id) {
 	delegate.setParentId(id);
     }
 
@@ -79,7 +79,7 @@ public class DelegatedBok implements Bok {
     }
 
     @Override
-    public void setUserId(int id) {
+    public void setUserId(String id) {
 	delegate.setUserId(id);
     }
 

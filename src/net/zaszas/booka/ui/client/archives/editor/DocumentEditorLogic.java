@@ -5,6 +5,7 @@ import net.zaszas.booka.core.client.document.Document;
 import net.zaszas.booka.core.client.document.DocumentClips;
 import net.zaszas.booka.core.client.document.DocumentManager;
 import net.zaszas.booka.core.client.event.Listener;
+import net.zaszas.booka.core.client.model.BokJSO;
 import net.zaszas.booka.ui.client.archives.editor.clip.ClipView;
 import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyEditorView;
 import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyViewerView;
@@ -31,6 +32,8 @@ public class DocumentEditorLogic {
 		current = clips;
 		Document document = clips.getDocument();
 		view.setDocument(document);
+		SlotView slot = view.createSlotView();
+		view.add(slot);
 		for (Clip clip : clips) {
 		    ClipView clipView = view.createClipView();
 		    clipView.setClip(clip);
@@ -57,6 +60,14 @@ public class DocumentEditorLogic {
 	propertyViewer.setDocument(document);
 	view.setPropertiesView(propertyViewer);
 	manager.update(document);
+    }
+
+    public void onSlotClicked(SlotView slot) {
+	ClipView clipView = view.createClipView();
+	Clip clip = new Clip(BokJSO.newInstance("Clip"));
+	clip.setBody("Pincha aquí para modificarme");
+	clipView.setClip(clip);
+	view.addBefore(slot, clipView);
     }
 
     public void setDocument(Document document) {

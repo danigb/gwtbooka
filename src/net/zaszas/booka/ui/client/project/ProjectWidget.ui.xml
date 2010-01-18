@@ -2,9 +2,18 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
-		
+		.project-item {
+			color: #00AEEF;
+			display: block;
+			text-align: center;
+			background-color: white;
+			padding: 0.5em 5%;
+			width: 80%;
+			margin-left: 5%;
+			margin-bottom: 0.5em;
+			-moz-border-radius: 1em;
+			cursor: pointer;
+		}
 	</ui:style>
-	<g:HTMLPanel>
-	<g:Label ui:field="title">project title</g:Label>
-	</g:HTMLPanel>
+	<g:Anchor ui:field="title" styleName="{style.project-item} hover-blue">project title</g:Anchor>
 </ui:UiBinder> 

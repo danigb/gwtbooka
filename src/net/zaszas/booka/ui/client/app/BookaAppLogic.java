@@ -40,7 +40,7 @@ public class BookaAppLogic {
 	    }
 	});
 
-	new HistoryManager(this);
+	new HistoryManager(this, projects, documents);
     }
 
     public void loadProjects() {

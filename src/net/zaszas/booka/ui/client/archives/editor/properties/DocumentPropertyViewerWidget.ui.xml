@@ -16,8 +16,14 @@
 			display: block;
 			float: right;
 		}
+		
+		.infoView {
+			border-top: 1px solid white;
+			border-bottom: 1px solid white;
+		}
+		
 	</ui:style>
-	<g:HTMLPanel styleName="container">
+	<g:HTMLPanel styleName="container {style.infoView}">
 	    <g:Anchor ui:field="edit" styleName="action {style.edit}">edit</g:Anchor>
 		<g:Label styleName="{style.title}" ui:field="title">Title</g:Label>
 		<g:Label styleName="{style.description}" ui:field="description">Description</g:Label>

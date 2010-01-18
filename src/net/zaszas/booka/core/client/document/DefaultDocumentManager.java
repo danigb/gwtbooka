@@ -35,7 +35,8 @@ public class DefaultDocumentManager implements DocumentManager {
 
     @Override
     public void createDocument(final Document document) {
-	Params params = BokToParams.toParams(document);
+	Params params = BokToParams.encode(document, new Params());
+	assert params != null : "JODER!";
 	manager.create("documents.create", RESOURCE, params, JSON, new RestCallback() {
 	    @Override
 	    public void onSuccess(String text) {
@@ -89,7 +90,7 @@ public class DefaultDocumentManager implements DocumentManager {
 
     @Override
     public void update(Document document) {
-	Params params = BokToParams.toParams(document);
+	Params params = BokToParams.encode(document, new Params());
 	manager.update("documents.update", RESOURCE, document.getIdString(), params, JSON, new RestCallback() {
 	    @Override
 	    public void onSuccess(String text) {

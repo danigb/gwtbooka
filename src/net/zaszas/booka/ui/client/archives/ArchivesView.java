@@ -6,6 +6,6 @@ public interface ArchivesView extends View {
 
     String KEY = "archives";
 
-    void loadProject(int projectId);
+    void setDocumentVisible(boolean visible);
 
 }

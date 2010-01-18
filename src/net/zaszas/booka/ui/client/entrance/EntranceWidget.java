@@ -5,7 +5,6 @@ import net.zaszas.booka.ui.client.project.ProjectListView;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
@@ -19,7 +18,6 @@ public class EntranceWidget extends Composite implements EntranceView {
 	dock = new DockLayoutPanel(PX);
 	initWidget(dock);
 	dock.addEast((Widget) projects, 250);
-	dock.add(new Label("Espacio por decidir"));
 	setWidth("100%");
 	setHeight("100%");
     }

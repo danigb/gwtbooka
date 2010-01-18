@@ -13,7 +13,7 @@ public class BokQuery {
 	query = new HashMap<String, String>();
     }
 
-    public void bokParentEquals(int id) {
+    public void bokParentEquals(String id) {
 	query.put("parent_id_equals", "" + id);
     }
 

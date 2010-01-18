@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.zaszas.rest.client.Params;
 import net.zaszas.rest.client.RestServiceAsync;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.Response;
@@ -108,7 +109,9 @@ public class RestManagerImpl implements RestManager {
     }
 
     protected void handleResponse(String requestId, Response response, RestCallback callback) {
-	callback.onSuccess(response.getText());
+	String text = response.getText();
+	Log.debug("RESPONSE (" + requestId + ")" + text);
+	callback.onSuccess(text);
     }
 
 }

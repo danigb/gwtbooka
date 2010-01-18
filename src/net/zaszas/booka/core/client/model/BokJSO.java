@@ -28,13 +28,13 @@ public class BokJSO extends JavaScriptObject implements Bok {
     }-*/;
 
     @Override
-    public final native int getId() /*-{
-        return this.bok.id;
+    public final native String getId() /*-{
+        return "" + this.bok.id;
     }-*/;
 
     @Override
-    public final native int getParentId() /*-{
-        return this.bok.parent_id;
+    public final native String getParentId() /*-{
+        return "" + this.bok.parent_id;
     }-*/;
 
     @Override
@@ -43,8 +43,8 @@ public class BokJSO extends JavaScriptObject implements Bok {
     }-*/;
 
     @Override
-    public final native int getUserId() /*-{
-        return this.bok.user_id;
+    public final native String getUserId() /*-{
+        return "" + this.bok.user_id;
     }-*/;
 
     @Override
@@ -68,7 +68,7 @@ public class BokJSO extends JavaScriptObject implements Bok {
     }-*/;
 
     @Override
-    public final native void setParentId(int id) /*-{
+    public final native void setParentId(String id) /*-{
         this.bok.parent_id = id;
     }-*/;
 
@@ -78,7 +78,7 @@ public class BokJSO extends JavaScriptObject implements Bok {
     }-*/;
 
     @Override
-    public final native void setUserId(int id) /*-{
+    public final native void setUserId(String id) /*-{
         this.bok.user_id = id;
     }-*/;
 }

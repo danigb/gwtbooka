@@ -12,7 +12,7 @@ public class Params {
     }
 
     public void put(String key, String value) {
-	if (key != null) {
+	if (key != null && value != null) {
 	    if (isFirst) {
 		isFirst = false;
 	    } else {

@@ -8,13 +8,13 @@ public interface Bok {
 
     String getDescription();
 
-    int getId();
+    String getId();
 
-    int getParentId();
+    String getParentId();
 
     String getTitle();
 
-    int getUserId();
+    String getUserId();
 
     String getUserName();
 
@@ -24,9 +24,9 @@ public interface Bok {
 
     void setDescription(String text);
 
-    void setParentId(int id);
+    void setParentId(String id);
 
     void setTitle(String title);
 
-    void setUserId(int id);
+    void setUserId(String id);
 }
