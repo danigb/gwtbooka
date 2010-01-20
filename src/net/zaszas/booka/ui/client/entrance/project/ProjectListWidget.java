@@ -1,4 +1,4 @@
-package net.zaszas.booka.ui.client.project;
+package net.zaszas.booka.ui.client.entrance.project;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

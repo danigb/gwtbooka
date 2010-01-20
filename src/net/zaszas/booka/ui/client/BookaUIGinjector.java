@@ -1,10 +1,10 @@
 package net.zaszas.booka.ui.client;
 
 import net.zaszas.booka.ui.client.app.BookaAppView;
-import net.zaszas.booka.ui.client.app.NavigationView;
+import net.zaszas.booka.ui.client.app.navigation.NavigationView;
 import net.zaszas.booka.ui.client.archives.ArchivesView;
 import net.zaszas.booka.ui.client.entrance.EntranceView;
-import net.zaszas.booka.ui.client.project.ProjectListView;
+import net.zaszas.booka.ui.client.entrance.project.ProjectListView;
 
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;

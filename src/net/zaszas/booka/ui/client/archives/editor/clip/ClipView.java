@@ -7,4 +7,6 @@ public interface ClipView extends View {
 
     void setClip(Clip clip);
 
+    void setEditorVisible(boolean visible);
+
 }

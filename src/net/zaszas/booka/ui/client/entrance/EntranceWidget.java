@@ -1,7 +1,7 @@
 package net.zaszas.booka.ui.client.entrance;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
-import net.zaszas.booka.ui.client.project.ProjectListView;
+import net.zaszas.booka.ui.client.entrance.project.ProjectListView;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;

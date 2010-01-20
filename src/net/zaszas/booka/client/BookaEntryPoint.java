@@ -8,9 +8,7 @@ import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -29,13 +27,7 @@ public class BookaEntryPoint implements EntryPoint {
 
     @Override
     public void onModuleLoad() {
-	Log.setUncaughtExceptionHandler();
-
-	DeferredCommand.addCommand(new Command() {
-	    public void execute() {
-		onModuleLoad2();
-	    }
-	});
+	onModuleLoad2();
     }
 
     protected void onModuleLoad2() {

@@ -1,4 +1,4 @@
-package net.zaszas.booka.ui.client.archives.editor;
+package net.zaszas.booka.ui.client.archives.editor.slot;
 
 import net.zaszas.booka.ui.client.View;
 

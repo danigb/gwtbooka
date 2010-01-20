@@ -14,5 +14,6 @@ public class ViewRegister {
 	GWT.log("VIEW REGISTER INIT", null);
 	viewRegistry.register(EntranceView.KEY, entranceProvider);
 	viewRegistry.register(ArchivesView.KEY, archivesProvider);
+
     }
 }

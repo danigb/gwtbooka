@@ -3,22 +3,15 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui">
 	<ui:style>
 		
-		.scroll {
-			background-color: white;
-		}
-		
-		.browser {
-			background-color: #efefef;
-		}
 	</ui:style>
-	<g:LayoutPanel styleName="{style.browser}">
+	<g:LayoutPanel styleName="bk-DocumentBrowser">
 		<g:layer left="0" top="0" right="0" height="30px">
-			<g:FlowPanel>
-				<g:Anchor ui:field="create" styleName="action">Create document</g:Anchor>
+			<g:FlowPanel styleName="Controls">
+				<g:Anchor ui:field="create" styleName="Action">Create document</g:Anchor>
 			</g:FlowPanel>
 		</g:layer>
 		<g:layer left="0" top="30px" right="0" bottom="0">
-			<g:ScrollPanel styleName="{style.scroll}">
+			<g:ScrollPanel styleName="Scroll">
 				<g:FlowPanel ui:field="list"></g:FlowPanel>
 			</g:ScrollPanel>
 		</g:layer>

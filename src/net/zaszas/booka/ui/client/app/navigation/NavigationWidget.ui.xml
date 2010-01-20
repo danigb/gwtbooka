@@ -11,11 +11,6 @@
 			cursor: pointer;
 		}
 		
-		.navigation {
-			width: 100%;
-			overflow: hidden;
-			background-color: white;
-		}
 		
 		.content {
 			background-color: #C6C8CA;
@@ -72,20 +67,20 @@
 	<ui:image field="contactImage" src="resources/contact.icon.png"></ui:image>
 	<ui:image field="calendarImage" src="resources/calendar.png"></ui:image>
 
-	<g:FlowPanel styleName="{style.navigation}">
-		<g:Hyperlink styleName="{style.icon} {style.entrance}"
+	<g:FlowPanel styleName="bk-Navigation">
+		<g:Hyperlink styleName="bk-Anchor {style.icon} {style.entrance}"
 			targetHistoryToken="/entrance" ui:field="entrance" />
-		<g:Hyperlink styleName="{style.icon} {style.archives}"
+		<g:Hyperlink styleName="bk-Anchor {style.icon} {style.archives}"
 			targetHistoryToken="/archives" ui:field="archives" />
-		<g:Hyperlink styleName="{style.icon} {style.edition}"
+		<g:Hyperlink styleName="bk-Anchor {style.icon} {style.edition}"
 			targetHistoryToken="/edition" ui:field="edition" />
-		<g:Hyperlink styleName="{style.icon} {style.booka}"
+		<g:Hyperlink styleName="bk-Anchor {style.icon} {style.booka}"
 			targetHistoryToken="/booka" ui:field="booka" />
-		<g:Hyperlink styleName="{style.icon} {style.right} {style.calendar}"
+		<g:Hyperlink styleName="bk-Anchor {style.icon} {style.right} {style.calendar}"
 			targetHistoryToken="/calendar" ui:field="calendar" />
-		<g:Hyperlink styleName="{style.icon} {style.right} {style.account}"
+		<g:Hyperlink styleName="bk-Anchor {style.icon} {style.right} {style.account}"
 			targetHistoryToken="/account" ui:field="account" />
-		<g:Hyperlink styleName="{style.icon} {style.right} {style.contact}"
+		<g:Hyperlink styleName="bk-Anchor {style.icon} {style.right} {style.contact}"
 			targetHistoryToken="/contact" ui:field="contact" />
 	</g:FlowPanel>
 </ui:UiBinder> 

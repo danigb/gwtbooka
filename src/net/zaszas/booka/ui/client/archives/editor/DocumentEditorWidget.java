@@ -4,8 +4,11 @@ import net.zaszas.booka.core.client.document.Document;
 import net.zaszas.booka.ui.client.View;
 import net.zaszas.booka.ui.client.archives.editor.clip.ClipView;
 import net.zaszas.booka.ui.client.archives.editor.clip.ClipWidget;
+import net.zaszas.booka.ui.client.archives.editor.clip.editor.ClipEditor;
 import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyEditorView;
 import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyViewerView;
+import net.zaszas.booka.ui.client.archives.editor.slot.SlotView;
+import net.zaszas.booka.ui.client.archives.editor.slot.SlotWidget;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -41,13 +44,8 @@ public class DocumentEditorWidget extends Composite implements DocumentEditorVie
 
     @Override
     public void add(View view) {
+	GWT.log("DEW add", null);
 	content.add((Widget) view);
-    }
-
-    @Override
-    public void addBefore(SlotView slot, ClipView clip) {
-	int slotIndex = content.getWidgetIndex((Widget) slot);
-	content.insert((Widget) clip, slotIndex);
     }
 
     @Override
@@ -56,13 +54,18 @@ public class DocumentEditorWidget extends Composite implements DocumentEditorVie
     }
 
     @Override
-    public ClipView createClipView() {
-	return new ClipWidget();
+    public ClipView createClipView(ClipEditor editor) {
+	return new ClipWidget(editor);
     }
 
     @Override
     public SlotView createSlotView() {
 	return new SlotWidget(logic);
+    }
+
+    @Override
+    public void insert(View view, int beforeIndex) {
+	content.insert((Widget) view, beforeIndex);
     }
 
     @Override

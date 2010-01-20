@@ -1,4 +1,4 @@
-package net.zaszas.booka.ui.client.app;
+package net.zaszas.booka.ui.client.app.navigation;
 
 import net.zaszas.booka.core.client.project.ProjectManager;
 

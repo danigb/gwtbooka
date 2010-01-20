@@ -2,8 +2,8 @@ package net.zaszas.booka.ui.client;
 
 import net.zaszas.booka.ui.client.app.BookaAppView;
 import net.zaszas.booka.ui.client.app.BookaAppWidget;
-import net.zaszas.booka.ui.client.app.NavigationView;
-import net.zaszas.booka.ui.client.app.NavigationWidget;
+import net.zaszas.booka.ui.client.app.navigation.NavigationView;
+import net.zaszas.booka.ui.client.app.navigation.NavigationWidget;
 import net.zaszas.booka.ui.client.archives.ArchivesView;
 import net.zaszas.booka.ui.client.archives.ArchivesWidget;
 import net.zaszas.booka.ui.client.archives.browser.DocumentBrowserView;
@@ -20,8 +20,8 @@ import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyVie
 import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyViewerWidget;
 import net.zaszas.booka.ui.client.entrance.EntranceView;
 import net.zaszas.booka.ui.client.entrance.EntranceWidget;
-import net.zaszas.booka.ui.client.project.ProjectListView;
-import net.zaszas.booka.ui.client.project.ProjectListWidget;
+import net.zaszas.booka.ui.client.entrance.project.ProjectListView;
+import net.zaszas.booka.ui.client.entrance.project.ProjectListWidget;
 import net.zaszas.booka.ui.client.register.DefaultViewRegistry;
 import net.zaszas.booka.ui.client.register.ViewRegister;
 import net.zaszas.booka.ui.client.register.ViewRegistry;

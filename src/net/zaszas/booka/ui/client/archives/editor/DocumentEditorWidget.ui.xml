@@ -2,30 +2,12 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:bok="urn:import:net.zaszas.booka.ui.client.widgets">
 	<ui:style>
-		.container {
-			width: 90%;
-			margin: 1em 5%;
-		}
 		
-		.content {
-			width: 80%;
-			margin: 0 auto;
-		}
-		
-		.page {
-			width: 80%;
-			margin: 0 10%;
-			min-height: 800px;
-			border: 1px solid gray;
-			background-color: white;
-			font-family: "Garamon", serif;
-			padding: 1em;
-		}
 	</ui:style>
-	<g:ScrollPanel styleName="Document {style.container}">
-		<g:FlowPanel styleName="{style.page}" ui:field="page">
+	<g:ScrollPanel styleName="bk-Document">
+		<g:FlowPanel styleName="Page" ui:field="page">
 			<g:SimplePanel ui:field="properties"></g:SimplePanel>
-			<g:FlowPanel styleName="content {style.content}"
+			<g:FlowPanel styleName="Content"
 				ui:field="content"></g:FlowPanel>
 		</g:FlowPanel>
 	</g:ScrollPanel>

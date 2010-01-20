@@ -5,20 +5,21 @@ import net.zaszas.booka.core.client.document.Document;
 import net.zaszas.booka.core.client.document.DocumentClips;
 import net.zaszas.booka.core.client.document.DocumentManager;
 import net.zaszas.booka.core.client.event.Listener;
-import net.zaszas.booka.core.client.model.BokJSO;
 import net.zaszas.booka.ui.client.archives.editor.clip.ClipView;
 import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyEditorView;
 import net.zaszas.booka.ui.client.archives.editor.properties.DocumentPropertyViewerView;
+import net.zaszas.booka.ui.client.archives.editor.slot.SlotWidget;
 
 import com.google.inject.Inject;
 
 public class DocumentEditorLogic {
 
     private DocumentEditorView view;
-    private DocumentClips current;
+    private final DocumentClips current;
     private DocumentPropertyViewerView propertyViewer;
     private DocumentPropertyEditorView propertyEditor;
     private final DocumentManager manager;
+    private ClipListLogic list;
 
     @Inject
     public DocumentEditorLogic(DocumentManager manager) {
@@ -28,18 +29,7 @@ public class DocumentEditorLogic {
 	manager.onDocumentsClips(new Listener<DocumentClips>() {
 	    @Override
 	    public void handle(DocumentClips clips) {
-		view.clear();
-		current = clips;
-		Document document = clips.getDocument();
-		view.setDocument(document);
-		SlotView slot = view.createSlotView();
-		view.add(slot);
-		for (Clip clip : clips) {
-		    ClipView clipView = view.createClipView();
-		    clipView.setClip(clip);
-		    view.add(clipView);
-		}
-		view.setDocumentVisible(true);
+		list.setList(clips);
 	    }
 	});
     }
@@ -62,12 +52,12 @@ public class DocumentEditorLogic {
 	manager.update(document);
     }
 
-    public void onSlotClicked(SlotView slot) {
-	ClipView clipView = view.createClipView();
-	Clip clip = new Clip(BokJSO.newInstance("Clip"));
-	clip.setBody("Pincha aquí para modificarme");
+    public void onSlotClicked(SlotWidget slot, String key) {
+	ClipView clipView = list.addPairAfter(slot);
+	Clip clip = new Clip();
+	clip.setBody("Esto es un clip");
 	clipView.setClip(clip);
-	view.addBefore(slot, clipView);
+	clipView.setEditorVisible(false);
     }
 
     public void setDocument(Document document) {
@@ -85,6 +75,8 @@ public class DocumentEditorLogic {
 
 	view.setDocumentVisible(current != null);
 	view.setPropertiesView(propertyViewer);
+
+	list = new ClipListLogic(view);
     }
 
 }

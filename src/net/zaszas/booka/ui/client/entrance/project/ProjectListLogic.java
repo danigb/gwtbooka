@@ -1,4 +1,4 @@
-package net.zaszas.booka.ui.client.project;
+package net.zaszas.booka.ui.client.entrance.project;
 
 import java.util.List;
 

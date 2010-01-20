@@ -2,6 +2,7 @@ package net.zaszas.booka.ui.client.app;
 
 import static com.google.gwt.dom.client.Style.Unit.PX;
 import net.zaszas.booka.ui.client.View;
+import net.zaszas.booka.ui.client.app.navigation.NavigationView;
 import net.zaszas.booka.ui.client.widgets.SwitchLayoutPanel;
 import net.zaszas.booka.ui.client.widgets.SwitchLayoutView.Transition;
 
